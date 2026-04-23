@@ -764,7 +764,7 @@ h3 {
 
 .spaces-section {
   overflow: hidden;
-  padding: 112px max(24px, calc((100vw - 1180px) / 2)) 92px;
+  padding: 112px max(24px, calc((100vw - 1180px) / 2)) 28px;
   background: var(--ink);
   color: var(--white);
 }
@@ -870,7 +870,7 @@ h3 {
 }
 
 .atlas-section {
-  padding: 116px max(16px, calc((100vw - 1180px) / 2)) 72px;
+  padding: 56px max(16px, calc((100vw - 1180px) / 2)) 72px;
 }
 
 .atlas-heading {
