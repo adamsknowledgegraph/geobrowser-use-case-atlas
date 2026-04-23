@@ -197,7 +197,7 @@ function createCasePanel(item, index) {
         <p>${item.summary}</p>
       </div>
       <div class="object-row" aria-label="${item.label} structured objects">
-        <span>Structured data</span>
+        <span>Geo-organized data</span>
         ${item.objects.map((object) => `<span>${object}</span>`).join("")}
       </div>
       <div class="metric-row" aria-label="${item.label} signals">

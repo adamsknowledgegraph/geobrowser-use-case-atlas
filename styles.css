@@ -252,6 +252,32 @@ h3 {
   line-height: 1.12;
 }
 
+.hero-definition {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.hero-definition span {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 9px 11px 7px;
+  border: 1px solid rgba(251, 251, 248, 0.18);
+  border-radius: 999px;
+  color: rgba(251, 251, 248, 0.78);
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.hero-definition span:first-child {
+  border-color: transparent;
+  background: var(--white);
+  color: var(--ink);
+}
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -510,6 +536,122 @@ h3 {
   white-space: nowrap;
 }
 
+.graph-power {
+  padding: 112px max(24px, calc((100vw - 1180px) / 2));
+  background: var(--paper);
+}
+
+.graph-power-heading {
+  display: grid;
+  grid-template-columns: 0.35fr minmax(0, 1fr);
+  gap: 44px;
+  align-items: start;
+}
+
+.graph-power .kicker {
+  color: var(--ink);
+}
+
+.graph-power-heading p {
+  max-width: 780px;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: clamp(18px, 1.9vw, 25px);
+  line-height: 1.16;
+}
+
+.graph-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 52px;
+  border: 1px solid rgba(251, 251, 248, 0.16);
+  background: var(--ink);
+  color: var(--white);
+}
+
+.graph-flow article {
+  position: relative;
+  min-height: 285px;
+  padding: 28px;
+  border-right: 1px solid rgba(251, 251, 248, 0.16);
+}
+
+.graph-flow article:last-child {
+  border-right: 0;
+}
+
+.graph-flow article::after {
+  position: absolute;
+  top: 40px;
+  right: -9px;
+  z-index: 1;
+  width: 18px;
+  height: 18px;
+  border-top: 1px solid rgba(251, 251, 248, 0.28);
+  border-right: 1px solid rgba(251, 251, 248, 0.28);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.graph-flow article:last-child::after {
+  display: none;
+}
+
+.graph-flow span {
+  color: var(--yellow);
+  font-family: "Calibre Semibold", Geist, sans-serif;
+  font-size: 15px;
+}
+
+.graph-flow h3 {
+  max-width: 330px;
+  margin-top: 72px;
+  font-size: clamp(34px, 3.8vw, 58px);
+  font-weight: 880;
+  line-height: 0.92;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+.graph-flow p {
+  max-width: 340px;
+  margin-top: 18px;
+  color: rgba(251, 251, 248, 0.66);
+  font-size: 18px;
+  line-height: 1.18;
+}
+
+.graph-benefits {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.graph-benefits article {
+  min-height: 196px;
+  padding: 22px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.graph-benefits strong {
+  display: block;
+  color: var(--ink);
+  font-size: clamp(24px, 2.5vw, 38px);
+  font-weight: 880;
+  line-height: 0.96;
+}
+
+.graph-benefits p {
+  margin-top: 48px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.18;
+}
+
 .belief-band {
   padding: 112px max(24px, calc((100vw - 1180px) / 2));
   background: var(--paper);
@@ -527,6 +669,7 @@ h3 {
 }
 
 .belief-band h2,
+.graph-power-heading h2,
 .atlas-heading h2,
 .spaces-heading h2,
 .movement-cta h2 {
@@ -1241,9 +1384,35 @@ h3 {
   }
 
   .belief-band > div,
+  .graph-power-heading,
   .atlas-heading,
   .spaces-heading {
     grid-template-columns: 1fr;
+  }
+
+  .graph-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .graph-flow article {
+    min-height: auto;
+    border-right: 0;
+    border-bottom: 1px solid rgba(251, 251, 248, 0.16);
+  }
+
+  .graph-flow article:last-child {
+    border-bottom: 0;
+  }
+
+  .graph-flow article::after {
+    top: auto;
+    right: 28px;
+    bottom: -9px;
+    transform: rotate(135deg);
+  }
+
+  .graph-benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .spaces-heading > p:not(.kicker) {
@@ -1344,6 +1513,7 @@ h3 {
   }
 
   .belief-band,
+  .graph-power,
   .atlas-section,
   .spaces-section {
     padding-right: 16px;
@@ -1356,11 +1526,43 @@ h3 {
   }
 
   .belief-band h2,
+  .graph-power-heading h2,
   .atlas-heading h2,
   .spaces-heading h2,
   .movement-cta h2 {
     font-size: clamp(34px, 9.4vw, 46px);
     line-height: 0.94;
+  }
+
+  .graph-power {
+    padding-top: 78px;
+    padding-bottom: 78px;
+  }
+
+  .graph-flow {
+    margin-top: 34px;
+  }
+
+  .graph-flow article {
+    padding: 24px 18px;
+  }
+
+  .graph-flow h3 {
+    margin-top: 50px;
+    font-size: clamp(32px, 9vw, 45px);
+  }
+
+  .graph-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .graph-benefits article {
+    min-height: auto;
+    padding: 20px 18px;
+  }
+
+  .graph-benefits p {
+    margin-top: 24px;
   }
 
   .spaces-section {
