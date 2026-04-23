@@ -1155,6 +1155,18 @@ h3 {
   z-index: 1;
 }
 
+.site-preview-image {
+  position: absolute;
+  inset: 38px 0 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: calc(100% - 38px);
+  background: var(--paper);
+  object-fit: cover;
+  object-position: center top;
+}
+
 .preview-art {
   position: relative;
   width: 100%;

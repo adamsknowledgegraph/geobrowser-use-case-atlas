@@ -71,7 +71,7 @@ const cases = [
     tone: "yellow",
     objects: ["Assets", "Events", "Flights", "Signal layers"],
     metrics: ["16 layers", "3 live feeds", "5,415 objects"],
-    embed: false,
+    previewImage: "./assets/previews/osint-globe-preview.png",
   },
   {
     label: "Supplements Evidence Explorer",
@@ -124,6 +124,7 @@ const cases = [
     tone: "yellow",
     objects: ["Papers", "Authors", "Labs", "Ideas"],
     metrics: ["Top 200 papers", "Authors", "Research threads"],
+    previewImage: "./assets/previews/top200ai-preview.png",
   },
   {
     label: "Geo Atlas",
@@ -206,8 +207,16 @@ function previewMarkup(item) {
         ${fallbackMarkup(item)}
       </div>
       ${
-        item.embed === false
-          ? ""
+        item.previewImage
+          ? `<img
+              class="site-preview-image"
+              src="${item.previewImage}"
+              alt="${item.label} preview"
+              loading="lazy"
+              onerror="this.remove()"
+            />`
+          : item.embed === false
+            ? ""
           : `<iframe
               class="site-frame"
               title="${item.label} preview"
