@@ -940,8 +940,8 @@ h3 {
 .case-panel {
   position: relative;
   display: grid;
-  min-height: 482px;
-  grid-template-columns: 56px minmax(360px, 0.92fr) minmax(0, 1fr);
+  min-height: 450px;
+  grid-template-columns: 56px minmax(360px, 0.84fr) minmax(360px, 1.08fr);
   gap: 0;
   overflow: hidden;
   border: 1px solid var(--line-strong);
@@ -1137,9 +1137,9 @@ h3 {
 
 .case-content {
   display: grid;
-  align-content: space-between;
-  gap: 28px;
-  padding: 30px;
+  align-content: start;
+  gap: 16px;
+  padding: 22px 24px 20px;
 }
 
 .case-meta {
@@ -1152,34 +1152,34 @@ h3 {
 
 .case-content h3 {
   max-width: 650px;
-  margin-top: 16px;
-  font-size: clamp(36px, 4.5vw, 72px);
+  margin-top: 10px;
+  font-size: clamp(28px, 3.35vw, 52px);
   font-weight: 900;
   letter-spacing: 0;
-  line-height: 0.9;
+  line-height: 0.93;
   overflow-wrap: break-word;
   text-wrap: balance;
 }
 
 .case-content p:not(.case-meta) {
   max-width: 640px;
-  margin-top: 18px;
+  margin-top: 12px;
   color: var(--muted);
-  font-size: clamp(17px, 1.6vw, 21px);
-  line-height: 1.22;
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.16;
 }
 
 .object-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .object-row span {
   display: inline-flex;
-  min-height: 32px;
+  min-height: 30px;
   align-items: center;
-  padding: 8px 10px 7px;
+  padding: 7px 10px 6px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--paper);
@@ -1200,14 +1200,14 @@ h3 {
 .metric-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .metric-row span {
   display: inline-flex;
-  min-height: 34px;
+  min-height: 30px;
   align-items: center;
-  padding: 8px 11px 7px;
+  padding: 7px 11px 6px;
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--ink-soft);
@@ -1219,11 +1219,11 @@ h3 {
 .case-link {
   display: inline-flex;
   width: fit-content;
-  min-height: 48px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 16px 12px;
+  padding: 12px 16px 10px;
   border-radius: 999px;
   background: var(--ink);
   color: var(--white);
@@ -1664,11 +1664,12 @@ h3 {
   }
 
   .case-content {
-    padding: 24px 18px;
+    gap: 16px;
+    padding: 22px 18px;
   }
 
   .case-content h3 {
-    font-size: clamp(34px, 11vw, 54px);
+    font-size: clamp(30px, 9.6vw, 46px);
   }
 
   .site-footer {
