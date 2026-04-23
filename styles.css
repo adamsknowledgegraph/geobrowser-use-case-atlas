@@ -731,8 +731,9 @@ h3 {
 }
 
 .video-section {
-  padding: 112px max(24px, calc((100vw - 1180px) / 2));
-  background: var(--paper);
+  padding: 112px max(24px, calc((100vw - 1180px) / 2)) 118px;
+  background: var(--ink);
+  color: var(--white);
 }
 
 .video-heading {
@@ -744,10 +745,11 @@ h3 {
 }
 
 .video-heading .kicker {
-  color: var(--ink);
+  color: var(--yellow);
 }
 
 .video-heading h2 {
+  max-width: 860px;
   font-size: clamp(44px, 6.2vw, 98px);
   font-weight: 880;
   letter-spacing: 0;
@@ -759,7 +761,7 @@ h3 {
 .video-heading p {
   max-width: 720px;
   margin-top: 24px;
-  color: var(--muted);
+  color: rgba(251, 251, 248, 0.66);
   font-size: clamp(18px, 1.9vw, 25px);
   line-height: 1.16;
 }
@@ -773,15 +775,46 @@ h3 {
 .video-card {
   display: grid;
   overflow: hidden;
-  border: 1px solid var(--line-strong);
+  border: 1px solid rgba(251, 251, 248, 0.16);
   border-radius: 8px;
-  background: var(--white);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.06);
+  background:
+    linear-gradient(135deg, rgba(251, 251, 248, 0.08), rgba(251, 251, 248, 0.025)),
+    rgba(251, 251, 248, 0.045);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.24);
 }
 
 .video-card.is-featured {
   grid-column: 1 / -1;
   grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.78fr);
+}
+
+.video-media {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  border-bottom: 1px solid rgba(251, 251, 248, 0.14);
+  background: var(--ink);
+}
+
+.video-card.is-featured .video-media {
+  border-right: 1px solid rgba(251, 251, 248, 0.14);
+  border-bottom: 0;
+}
+
+.video-media::before {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--coral);
+  box-shadow:
+    14px 0 0 var(--yellow),
+    28px 0 0 var(--green);
+  content: "";
+  pointer-events: none;
 }
 
 .video-card video {
@@ -794,20 +827,22 @@ h3 {
     linear-gradient(90deg, rgba(251, 251, 248, 0.05) 1px, transparent 1px),
     var(--ink);
   background-size: 30px 30px;
+  object-fit: cover;
 }
 
 .video-copy {
   display: grid;
   align-content: start;
-  gap: 16px;
+  gap: 14px;
   padding: 24px;
 }
 
-.video-copy span {
+.video-eyebrow {
   display: inline-flex;
   width: fit-content;
   min-height: 32px;
   align-items: center;
+  margin: 0;
   padding: 8px 10px 6px;
   border-radius: 999px;
   background: var(--yellow);
@@ -815,9 +850,11 @@ h3 {
   font-size: 12px;
   font-weight: 850;
   line-height: 1;
+  text-transform: uppercase;
 }
 
 .video-copy h3 {
+  color: var(--white);
   font-size: clamp(26px, 3vw, 48px);
   font-weight: 880;
   line-height: 0.94;
@@ -829,8 +866,9 @@ h3 {
   font-size: clamp(24px, 2.3vw, 36px);
 }
 
-.video-copy p {
-  color: var(--muted);
+.video-copy p:not(.video-eyebrow) {
+  max-width: 600px;
+  color: rgba(251, 251, 248, 0.66);
   font-size: 17px;
   line-height: 1.2;
 }
