@@ -25,8 +25,8 @@
   --coral: #ff523a;
   --mint: #b7f8df;
   --shadow: 0 28px 90px rgba(0, 0, 0, 0.16);
-  --content-max: 1180px;
-  --hero-shell: 1680px;
+  --content-max: 1400px;
+  --hero-shell: 1780px;
   color-scheme: light;
 }
 
@@ -639,7 +639,7 @@ h3 {
 }
 
 .graph-power {
-  padding: 112px max(24px, calc((100vw - 1180px) / 2)) 52px;
+  padding: 112px max(24px, calc((100vw - var(--content-max)) / 2)) 52px;
   background: var(--paper);
 }
 
@@ -663,7 +663,7 @@ h3 {
 }
 
 .belief-band {
-  padding: 112px max(24px, calc((100vw - 1180px) / 2));
+  padding: 112px max(24px, calc((100vw - var(--content-max)) / 2));
   background: var(--paper);
 }
 
@@ -741,7 +741,7 @@ h3 {
 }
 
 .video-section {
-  padding: 112px max(24px, calc((100vw - 1180px) / 2)) 118px;
+  padding: 112px max(24px, calc((100vw - var(--content-max)) / 2)) 118px;
   background: var(--ink);
   color: var(--white);
 }
@@ -885,7 +885,7 @@ h3 {
 
 .spaces-section {
   overflow: hidden;
-  padding: 112px max(24px, calc((100vw - 1180px) / 2)) 28px;
+  padding: 112px max(24px, calc((100vw - var(--content-max)) / 2)) 28px;
   background: var(--ink);
   color: var(--white);
 }
@@ -991,7 +991,7 @@ h3 {
 }
 
 .atlas-section {
-  padding: 56px max(16px, calc((100vw - 1180px) / 2)) 72px;
+  padding: 56px max(16px, calc((100vw - var(--content-max)) / 2)) 72px;
 }
 
 .atlas-heading {
@@ -1140,11 +1140,11 @@ h3 {
   top: 38px;
   left: 50%;
   z-index: 2;
-  width: 1180px;
-  height: 1180px;
+  width: 1280px;
+  height: 1280px;
   border: 0;
   background: white;
-  transform: translateX(-50%) scale(0.38);
+  transform: translateX(-50%) scale(0.4);
   transform-origin: top center;
   pointer-events: none;
 }
@@ -1446,7 +1446,7 @@ h3 {
 
 .site-footer {
   display: flex;
-  width: min(1180px, calc(100% - 32px));
+  width: min(var(--content-max), calc(100% - 32px));
   min-height: 108px;
   align-items: center;
   justify-content: space-between;
@@ -1471,7 +1471,7 @@ h3 {
 .movement-cta {
   position: relative;
   overflow: hidden;
-  width: min(1180px, calc(100% - 32px));
+  width: min(var(--content-max), calc(100% - 32px));
   min-height: 430px;
   margin: 0 auto 28px;
   padding: 44px;
