@@ -8,6 +8,7 @@ const cases = [
       "A debate interface where visible agent identities, source receipts, and contested claims are structured into an inspectable graph.",
     url: "https://theydebated.com/",
     tone: "coral",
+    objects: ["Speakers", "Claims", "Sources", "Rebuttals"],
     metrics: ["49 claims", "3 agents", "Source receipts"],
   },
   {
@@ -19,6 +20,7 @@ const cases = [
       "Rows, studies, claims, source URLs, outcomes, safety notes, and evidence levels turn into a usable health knowledge graph.",
     url: "https://supplements-kg-explorer.vercel.app/",
     tone: "green",
+    objects: ["Studies", "Outcomes", "Evidence levels", "Safety notes"],
     metrics: ["189 rows", "243 sources", "122 candidates"],
   },
   {
@@ -30,6 +32,7 @@ const cases = [
       "A geopolitical brief structured around claims, source trails, context, maps, and expert perspectives rather than a flat article.",
     url: "https://understandiranwar.com/",
     tone: "blue",
+    objects: ["Claims", "Maps", "Actors", "Source trails"],
     metrics: ["Claims", "Sources", "Maps"],
   },
   {
@@ -41,6 +44,7 @@ const cases = [
       "A live geospatial intelligence surface combining open infrastructure data, active events, and signal layers in one operational view.",
     url: "https://osint.graphatlas.tech/",
     tone: "yellow",
+    objects: ["Assets", "Events", "Flights", "Signal layers"],
     metrics: ["16 layers", "3 live feeds", "5,415 objects"],
     embed: false,
   },
@@ -53,6 +57,7 @@ const cases = [
       "A biological network view for E. coli where genes, flux changes, metabolites, pathways, and omics layers can be compared.",
     url: "https://ciaran-lundy.github.io/geo_gem/visualise.html",
     tone: "purple",
+    objects: ["Genes", "Metabolites", "Flux changes", "Pathways"],
     metrics: ["Flux map", "Omics layers", "Pathways"],
   },
   {
@@ -64,6 +69,7 @@ const cases = [
       "World Bank, HLO, Giga, and geoBoundaries data are staged into an interface for comparing education inequality signals.",
     url: "https://athsrueas.github.io/Open_Data/",
     tone: "mint",
+    objects: ["Countries", "Funding", "Access", "Outcomes"],
     metrics: ["Countries", "Access", "Funding"],
   },
   {
@@ -75,6 +81,7 @@ const cases = [
       "A constellation for exploring standout Geo profiles, rich bios, teams, categories, and community structure.",
     url: "https://atlas-rouge-nine.vercel.app/",
     tone: "pink",
+    objects: ["Profiles", "Teams", "Skills", "Projects"],
     metrics: ["Profiles", "Teams", "Skills"],
   },
   {
@@ -86,6 +93,7 @@ const cases = [
       "A disease explorer that makes cure status, disease categories, public-health facts, and research context easier to scan.",
     url: "https://disease-data-explorer--deeneyyrn.replit.app/",
     tone: "green",
+    objects: ["Diseases", "Cure status", "Categories", "Research"],
     metrics: ["Diseases", "Cure status", "Categories"],
   },
   {
@@ -97,6 +105,7 @@ const cases = [
       "Current events are organized into topic spaces, source-backed story pages, featured timelines, and related entities.",
     url: "https://news.geobrowser.io/",
     tone: "blue",
+    objects: ["Stories", "Topics", "Sources", "Timelines"],
     metrics: ["Stories", "Topics", "Sources"],
   },
   {
@@ -108,6 +117,7 @@ const cases = [
       "Profiles connect work, education, speaking, posts, projects, and key contributions as structured public knowledge.",
     url: "https://people.geobrowser.io/",
     tone: "purple",
+    objects: ["Profiles", "Work", "Projects", "Contributions"],
     metrics: ["Work", "Projects", "Contributions"],
   },
   {
@@ -119,6 +129,7 @@ const cases = [
       "Episode metadata, topics, guests, shows, and current conversations become a browsable knowledge layer.",
     url: "https://podcasts.geobrowser.io/",
     tone: "pink",
+    objects: ["Episodes", "Guests", "Topics", "Shows"],
     metrics: ["Episodes", "Topics", "People"],
   },
 ];
@@ -184,6 +195,10 @@ function createCasePanel(item, index) {
         <p class="case-meta">${item.category} / ${item.tag}</p>
         <h3>${item.title}</h3>
         <p>${item.summary}</p>
+      </div>
+      <div class="object-row" aria-label="${item.label} structured objects">
+        <span>Structured data</span>
+        ${item.objects.map((object) => `<span>${object}</span>`).join("")}
       </div>
       <div class="metric-row" aria-label="${item.label} signals">
         ${item.metrics.map((metric) => `<span>${metric}</span>`).join("")}
