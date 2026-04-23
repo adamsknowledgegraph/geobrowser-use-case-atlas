@@ -1216,6 +1216,12 @@ h3 {
   line-height: 1;
 }
 
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .case-link {
   display: inline-flex;
   width: fit-content;
@@ -1239,6 +1245,19 @@ h3 {
 .case-link:hover,
 .case-link:focus-visible {
   background: var(--case-accent, var(--yellow));
+  color: var(--ink);
+}
+
+.case-link-secondary {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.case-link-secondary:hover,
+.case-link-secondary:focus-visible {
+  border-color: var(--case-accent, var(--yellow));
+  background: color-mix(in srgb, var(--case-accent, var(--yellow)) 16%, white);
   color: var(--ink);
 }
 
@@ -1481,6 +1500,10 @@ h3 {
     grid-column: 2;
     border-top: 1px solid var(--line);
   }
+
+  .case-links {
+    gap: 8px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -1670,6 +1693,11 @@ h3 {
 
   .case-content h3 {
     font-size: clamp(30px, 9.6vw, 46px);
+  }
+
+  .case-links {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 
   .site-footer {

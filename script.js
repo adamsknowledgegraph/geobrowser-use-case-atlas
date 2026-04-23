@@ -1,100 +1,15 @@
 const cases = [
   {
-    label: "TheyDebated",
-    category: "Claims",
-    tag: "Public reasoning",
-    title: "AI agents debate current events while building a living claim ledger.",
+    label: "Geo Podcasts",
+    category: "Media",
+    tag: "Conversation graph",
+    title: "Podcasts become a searchable graph of episodes, topics, people, and ideas.",
     summary:
-      "A debate interface where visible agent identities, source receipts, and contested claims are structured into an inspectable graph.",
-    url: "https://theydebated.com/",
-    tone: "coral",
-    objects: ["Speakers", "Claims", "Sources", "Rebuttals"],
-    metrics: ["49 claims", "3 agents", "Source receipts"],
-  },
-  {
-    label: "Supplements Evidence Explorer",
-    category: "Health",
-    tag: "Evidence graph",
-    title: "Supplement research becomes a navigable map of outcomes and evidence.",
-    summary:
-      "Rows, studies, claims, source URLs, outcomes, safety notes, and evidence levels turn into a usable health knowledge graph.",
-    url: "https://supplements-kg-explorer.vercel.app/",
-    tone: "green",
-    objects: ["Studies", "Outcomes", "Evidence levels", "Safety notes"],
-    metrics: ["189 rows", "243 sources", "122 candidates"],
-  },
-  {
-    label: "Understand Iran War",
-    category: "World Affairs",
-    tag: "Transparent dossier",
-    title: "Conflict explainers become connected dossiers of claims, maps, and sources.",
-    summary:
-      "A geopolitical brief structured around claims, source trails, context, maps, and expert perspectives rather than a flat article.",
-    url: "https://understandiranwar.com/",
-    tone: "blue",
-    objects: ["Claims", "Maps", "Actors", "Source trails"],
-    metrics: ["Claims", "Sources", "Maps"],
-  },
-  {
-    label: "OSINT Globe",
-    category: "Intelligence",
-    tag: "Geospatial graph",
-    title: "Infrastructure, fires, aircraft, and GPS interference become one live theater map.",
-    summary:
-      "A live geospatial intelligence surface combining open infrastructure data, active events, and signal layers in one operational view.",
-    url: "https://osint.graphatlas.tech/",
-    tone: "yellow",
-    objects: ["Assets", "Events", "Flights", "Signal layers"],
-    metrics: ["16 layers", "3 live feeds", "5,415 objects"],
-    embed: false,
-  },
-  {
-    label: "iML1515 Metabolic Network",
-    category: "Science",
-    tag: "Systems biology",
-    title: "Gene-knockout fitness data becomes an explorable metabolic network.",
-    summary:
-      "A biological network view for E. coli where genes, flux changes, metabolites, pathways, and omics layers can be compared.",
-    url: "https://ciaran-lundy.github.io/geo_gem/visualise.html",
-    tone: "purple",
-    objects: ["Genes", "Metabolites", "Flux changes", "Pathways"],
-    metrics: ["Flux map", "Omics layers", "Pathways"],
-  },
-  {
-    label: "Educational Inequality Map",
-    category: "Education",
-    tag: "Open data viewer",
-    title: "Education access, funding, and outcomes become comparable across countries.",
-    summary:
-      "World Bank, HLO, Giga, and geoBoundaries data are staged into an interface for comparing education inequality signals.",
-    url: "https://athsrueas.github.io/Open_Data/",
-    tone: "mint",
-    objects: ["Countries", "Funding", "Access", "Outcomes"],
-    metrics: ["Countries", "Access", "Funding"],
-  },
-  {
-    label: "Geo Atlas",
-    category: "Community",
-    tag: "People graph",
-    title: "Community profiles become a living atlas of people, teams, and skills.",
-    summary:
-      "A constellation for exploring standout Geo profiles, rich bios, teams, categories, and community structure.",
-    url: "https://atlas-rouge-nine.vercel.app/",
+      "Episode metadata, topics, guests, shows, and current conversations become a browsable knowledge layer.",
+    url: "https://podcasts.geobrowser.io/",
     tone: "pink",
-    objects: ["Profiles", "Teams", "Skills", "Projects"],
-    metrics: ["Profiles", "Teams", "Skills"],
-  },
-  {
-    label: "Disease Data Explorer",
-    category: "Health",
-    tag: "Public health",
-    title: "Disease burden and cure status become structured public-health intelligence.",
-    summary:
-      "A disease explorer that makes cure status, disease categories, public-health facts, and research context easier to scan.",
-    url: "https://disease-data-explorer--deeneyyrn.replit.app/",
-    tone: "green",
-    objects: ["Diseases", "Cure status", "Categories", "Research"],
-    metrics: ["Diseases", "Cure status", "Categories"],
+    objects: ["Episodes", "Guests", "Topics", "Shows"],
+    metrics: ["Episodes", "Topics", "People"],
   },
   {
     label: "Geo News",
@@ -121,20 +36,131 @@ const cases = [
     metrics: ["Work", "Projects", "Contributions"],
   },
   {
-    label: "Geo Podcasts",
-    category: "Media",
-    tag: "Conversation graph",
-    title: "Podcasts become a searchable graph of episodes, topics, people, and ideas.",
+    label: "Understand Iran War",
+    category: "World Affairs",
+    tag: "Transparent dossier",
+    title: "Conflict explainers become connected dossiers of claims, maps, and sources.",
     summary:
-      "Episode metadata, topics, guests, shows, and current conversations become a browsable knowledge layer.",
-    url: "https://podcasts.geobrowser.io/",
+      "A geopolitical brief structured around claims, source trails, context, maps, and expert perspectives rather than a flat article.",
+    url: "https://understandiranwar.com/",
+    dataUrl: "https://www.geobrowser.io/space/f65885c9012be9a9201ddeb6e8c92b61",
+    tone: "blue",
+    objects: ["Claims", "Maps", "Actors", "Source trails"],
+    metrics: ["Claims", "Sources", "Maps"],
+  },
+  {
+    label: "TheyDebated",
+    category: "Claims",
+    tag: "Public reasoning",
+    title: "AI agents debate current events while building a living claim ledger.",
+    summary:
+      "A debate interface where visible agent identities, source receipts, and contested claims are structured into an inspectable graph.",
+    url: "https://theydebated.com/",
+    tone: "coral",
+    objects: ["Speakers", "Claims", "Sources", "Rebuttals"],
+    metrics: ["49 claims", "3 agents", "Source receipts"],
+  },
+  {
+    label: "OSINT Globe",
+    category: "Intelligence",
+    tag: "Geospatial graph",
+    title: "Infrastructure, fires, aircraft, and GPS interference become one live theater map.",
+    summary:
+      "A live geospatial intelligence surface combining open infrastructure data, active events, and signal layers in one operational view.",
+    url: "https://osint.graphatlas.tech/",
+    tone: "yellow",
+    objects: ["Assets", "Events", "Flights", "Signal layers"],
+    metrics: ["16 layers", "3 live feeds", "5,415 objects"],
+    embed: false,
+  },
+  {
+    label: "Supplements Evidence Explorer",
+    category: "Health",
+    tag: "Evidence graph",
+    title: "Supplement research becomes a navigable map of outcomes and evidence.",
+    summary:
+      "Rows, studies, claims, source URLs, outcomes, safety notes, and evidence levels turn into a usable health knowledge graph.",
+    url: "https://supplements-kg-explorer.vercel.app/",
+    dataUrl:
+      "https://www.geobrowser.io/space/b5a31f8182b042437ede0f84ee02f104?tabId=b9e3c99a3db144c4976555bf8f0a167a",
+    tone: "green",
+    objects: ["Studies", "Outcomes", "Evidence levels", "Safety notes"],
+    metrics: ["189 rows", "243 sources", "122 candidates"],
+  },
+  {
+    label: "Disease Data Explorer",
+    category: "Health",
+    tag: "Public health",
+    title: "Disease burden and cure status become structured public-health intelligence.",
+    summary:
+      "A disease explorer that makes cure status, disease categories, public-health facts, and research context easier to scan.",
+    url: "https://disease-data-explorer--deeneyyrn.replit.app/",
+    tone: "green",
+    objects: ["Diseases", "Cure status", "Categories", "Research"],
+    metrics: ["Diseases", "Cure status", "Categories"],
+  },
+  {
+    label: "Top 200 AI Papers",
+    category: "Science",
+    tag: "Research graph",
+    title: "Influential AI papers become a connected map of authors, labs, ideas, and lineage.",
+    summary:
+      "A research explorer that organizes landmark AI papers into a graph of publications, institutions, citations, and conceptual families.",
+    url: "https://ai.graphatlas.tech/top200ai",
+    dataUrl: "https://www.geobrowser.io/space/41e851610e13a19441c4d980f2f2ce6b",
+    tone: "yellow",
+    objects: ["Papers", "Authors", "Labs", "Ideas"],
+    metrics: ["Top 200 papers", "Authors", "Research threads"],
+  },
+  {
+    label: "Geo Atlas",
+    category: "Community",
+    tag: "People graph",
+    title: "Community profiles become a living atlas of people, teams, and skills.",
+    summary:
+      "A constellation for exploring standout Geo profiles, rich bios, teams, categories, and community structure.",
+    url: "https://atlas-rouge-nine.vercel.app/",
     tone: "pink",
-    objects: ["Episodes", "Guests", "Topics", "Shows"],
-    metrics: ["Episodes", "Topics", "People"],
+    objects: ["Profiles", "Teams", "Skills", "Projects"],
+    metrics: ["Profiles", "Teams", "Skills"],
+  },
+  {
+    label: "iML1515 Metabolic Network",
+    category: "Science",
+    tag: "Systems biology",
+    title: "Gene-knockout fitness data becomes an explorable metabolic network.",
+    summary:
+      "A biological network view for E. coli where genes, flux changes, metabolites, pathways, and omics layers can be compared.",
+    url: "https://ciaran-lundy.github.io/geo_gem/visualise.html",
+    tone: "purple",
+    objects: ["Genes", "Metabolites", "Flux changes", "Pathways"],
+    metrics: ["Flux map", "Omics layers", "Pathways"],
+  },
+  {
+    label: "Educational Inequality Map",
+    category: "Education",
+    tag: "Open data viewer",
+    title: "Education access, funding, and outcomes become comparable across countries.",
+    summary:
+      "World Bank, HLO, Giga, and geoBoundaries data are staged into an interface for comparing education inequality signals.",
+    url: "https://athsrueas.github.io/Open_Data/",
+    tone: "mint",
+    objects: ["Countries", "Funding", "Access", "Outcomes"],
+    metrics: ["Countries", "Access", "Funding"],
   },
 ];
 
-const filters = ["All", ...Array.from(new Set(cases.map((item) => item.category)))];
+const filters = [
+  "All",
+  "Claims",
+  "Health",
+  "World Affairs",
+  "Intelligence",
+  "Science",
+  "Education",
+  "Community",
+  "Media",
+].filter((filter) => filter === "All" || cases.some((item) => item.category === filter));
 const icon = `
   <svg viewBox="0 0 20 20" aria-hidden="true">
     <path d="M7 7h6v6M13 7 6 14" />
@@ -203,10 +229,20 @@ function createCasePanel(item, index) {
       <div class="metric-row" aria-label="${item.label} signals">
         ${item.metrics.map((metric) => `<span>${metric}</span>`).join("")}
       </div>
-      <a class="case-link" href="${item.url}" target="_blank" rel="noreferrer">
-        <span>Open use case</span>
-        ${icon}
-      </a>
+      <div class="case-links">
+        <a class="case-link" href="${item.url}" target="_blank" rel="noreferrer">
+          <span>Open use case</span>
+          ${icon}
+        </a>
+        ${
+          item.dataUrl
+            ? `<a class="case-link case-link-secondary" href="${item.dataUrl}" target="_blank" rel="noreferrer">
+                <span>View Geo data</span>
+                ${icon}
+              </a>`
+            : ""
+        }
+      </div>
     </div>
   `;
 
