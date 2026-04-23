@@ -100,6 +100,19 @@ const cases = [
     metrics: ["Diseases", "Cure status", "Categories"],
   },
   {
+    label: "Disease Atlas",
+    category: "Health",
+    tag: "Disease graph",
+    title: "Disease biology, treatments, pathways, and evidence become a source-backed atlas.",
+    summary:
+      "A biomedical workbench for moving from a disease to genes, drugs, mechanisms, pathways, and source links without losing provenance.",
+    url: "https://adamsknowledgegraph.github.io/hetionet/",
+    dataUrl: "https://www.geobrowser.io/space/141d3ace705feabc04d50c78bbf7226e",
+    tone: "green",
+    objects: ["Diseases", "Genes", "Drugs", "Pathways"],
+    metrics: ["16 disease packets", "1,522 graph objects", "3,297 claims"],
+  },
+  {
     label: "Top 200 AI Papers",
     category: "Science",
     tag: "Research graph",
