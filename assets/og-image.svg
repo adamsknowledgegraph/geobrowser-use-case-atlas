@@ -1,0 +1,123 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0V52" stroke="#FBFBF8" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="cardFill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FBFBF8" stop-opacity="0.15"/>
+      <stop offset="1" stop-color="#FBFBF8" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#151515" stop-opacity="0"/>
+      <stop offset="1" stop-color="#151515" stop-opacity="0.96"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="#151515"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect y="410" width="1200" height="220" fill="url(#fade)"/>
+
+  <path d="M214 235L675 356L1048 156" stroke="#FBFBF8" stroke-opacity="0.16" stroke-width="1.4"/>
+  <path d="M186 508L585 392L1030 509" stroke="#FBFBF8" stroke-opacity="0.11" stroke-width="1.4"/>
+  <path d="M675 356L892 486" stroke="#FBFBF8" stroke-opacity="0.13" stroke-width="1.4"/>
+
+  <circle cx="186" cy="128" r="28" fill="#FF56D0" opacity="0.1"/>
+  <circle cx="675" cy="356" r="36" fill="#4361EE" opacity="0.12"/>
+  <circle cx="1048" cy="156" r="32" fill="#D8FF36" opacity="0.12"/>
+  <circle cx="214" cy="504" r="28" fill="#FF523A" opacity="0.1"/>
+  <circle cx="1010" cy="500" r="34" fill="#2ACE9D" opacity="0.1"/>
+  <circle cx="186" cy="128" r="7" fill="#FF56D0" stroke="#FBFBF8" stroke-opacity="0.82" stroke-width="2"/>
+  <circle cx="675" cy="356" r="9" fill="#4361EE" stroke="#FBFBF8" stroke-opacity="0.82" stroke-width="2"/>
+  <circle cx="1048" cy="156" r="8" fill="#D8FF36" stroke="#FBFBF8" stroke-opacity="0.82" stroke-width="2"/>
+  <circle cx="214" cy="504" r="7" fill="#FF523A" stroke="#FBFBF8" stroke-opacity="0.82" stroke-width="2"/>
+  <circle cx="1010" cy="500" r="8" fill="#2ACE9D" stroke="#FBFBF8" stroke-opacity="0.82" stroke-width="2"/>
+
+  <rect x="70" y="42" width="1060" height="66" rx="8" fill="#151515" fill-opacity="0.76" stroke="#FBFBF8" stroke-opacity="0.16"/>
+  <g transform="translate(95 60)">
+    <path d="M4 4C9.5 24 31 28 42 11" stroke="#FF56D0" stroke-width="8" stroke-linecap="round"/>
+    <path d="M8 19C17 30 33 28 42 11" stroke="#6833FF" stroke-width="8" stroke-linecap="round"/>
+    <path d="M12 23H34" stroke="#FBFBF8" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <text x="150" y="82" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="26" font-weight="800">Geo</text>
+  <rect x="213" y="59" width="154" height="30" rx="15" fill="#FBFBF8" fill-opacity="0.06" stroke="#FBFBF8" stroke-opacity="0.18"/>
+  <text x="232" y="80" fill="#FBFBF8" fill-opacity="0.72" font-family="Geist, Inter, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="2">PROJECT PORTFOLIO</text>
+  <text x="930" y="82" fill="#FBFBF8" fill-opacity="0.72" font-family="Geist, Inter, Arial, sans-serif" font-size="16" font-weight="700">geobrowser.io</text>
+
+  <text x="70" y="168" fill="#D8FF36" font-family="Geist, Inter, Arial, sans-serif" font-size="16" font-weight="900" letter-spacing="4">PORTFOLIO OF GEO-POWERED PROJECTS</text>
+  <text x="70" y="251" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="84" font-weight="900" letter-spacing="0">Geo portfolio.</text>
+  <text x="74" y="306" fill="#FBFBF8" fill-opacity="0.74" font-family="Geist, Inter, Arial, sans-serif" font-size="27" font-weight="650">
+    <tspan x="74" dy="0">Websites, videos, maps, and explorers</tspan>
+    <tspan x="74" dy="36">powered by data organized on</tspan>
+    <tspan x="74" dy="36">Geo&apos;s knowledge graph.</tspan>
+  </text>
+
+  <g font-family="Geist, Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#FBFBF8" fill-opacity="0.76">
+    <circle cx="80" cy="425" r="4" fill="#D8FF36"/>
+    <text x="94" y="431">Portfolio of projects</text>
+    <circle cx="259" cy="425" r="4" fill="#2ACE9D"/>
+    <text x="273" y="431">Data organized on Geo</text>
+    <circle cx="471" cy="425" r="4" fill="#FF56D0"/>
+    <text x="485" y="431">Knowledge graph powered</text>
+  </g>
+
+  <g transform="translate(70 492)">
+    <rect width="170" height="54" rx="27" fill="#D8FF36"/>
+    <text x="28" y="35" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="17" font-weight="900">Explore atlas</text>
+    <path d="M140 27H153M148 20L155 27L148 34" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(260 492)">
+    <rect width="230" height="54" rx="27" fill="#FBFBF8" fill-opacity="0.07" stroke="#FBFBF8" stroke-opacity="0.22"/>
+    <text x="27" y="35" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="17" font-weight="850">Visit geobrowser.io</text>
+    <path d="M197 22H209V34M209 22L194 37" stroke="#FBFBF8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g transform="translate(744 168)">
+    <g transform="rotate(-2 180 73)">
+      <rect width="358" height="142" rx="8" fill="url(#cardFill)" stroke="#FBFBF8" stroke-opacity="0.16"/>
+      <rect x="24" y="24" width="55" height="30" rx="15" fill="#D8FF36"/>
+      <text x="42" y="45" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="13" font-weight="900">Data</text>
+      <text x="24" y="104" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="36" font-weight="900" letter-spacing="0">Organized on Geo</text>
+    </g>
+  </g>
+
+  <g transform="translate(782 326)">
+    <g transform="rotate(1 180 73)">
+      <rect width="346" height="136" rx="8" fill="url(#cardFill)" stroke="#FBFBF8" stroke-opacity="0.16"/>
+      <rect x="24" y="22" width="64" height="30" rx="15" fill="#2ACE9D"/>
+      <text x="42" y="43" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="13" font-weight="900">Graph</text>
+      <text x="24" y="94" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="0">Connected by</text>
+      <text x="24" y="127" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="0">meaning</text>
+    </g>
+  </g>
+
+  <g transform="translate(842 476)">
+    <g transform="rotate(2 144 56)">
+      <rect width="286" height="106" rx="8" fill="url(#cardFill)" stroke="#FBFBF8" stroke-opacity="0.16"/>
+      <rect x="22" y="19" width="76" height="28" rx="14" fill="#FF56D0"/>
+      <text x="39" y="39" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="12" font-weight="900">Projects</text>
+      <text x="22" y="81" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="30" font-weight="900" letter-spacing="0">Usable interfaces</text>
+    </g>
+  </g>
+
+  <rect y="586" width="1200" height="44" fill="#D8FF36"/>
+  <g font-family="Geist, Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="#FBFBF8">
+    <rect x="70" y="596" width="82" height="25" rx="12.5" fill="#151515"/>
+    <text x="90" y="613">Articles</text>
+    <rect x="164" y="596" width="76" height="25" rx="12.5" fill="#151515"/>
+    <text x="185" y="613">Videos</text>
+    <rect x="252" y="596" width="88" height="25" rx="12.5" fill="#151515"/>
+    <text x="274" y="613">Podcasts</text>
+    <rect x="352" y="596" width="74" height="25" rx="12.5" fill="#151515"/>
+    <text x="373" y="613">Maps</text>
+    <rect x="438" y="596" width="88" height="25" rx="12.5" fill="#151515"/>
+    <text x="460" y="613">Claims</text>
+    <rect x="538" y="596" width="92" height="25" rx="12.5" fill="#151515"/>
+    <text x="560" y="613">Sources</text>
+    <rect x="642" y="596" width="82" height="25" rx="12.5" fill="#151515"/>
+    <text x="664" y="613">People</text>
+    <rect x="736" y="596" width="76" height="25" rx="12.5" fill="#151515"/>
+    <text x="758" y="613">Places</text>
+    <rect x="824" y="596" width="92" height="25" rx="12.5" fill="#151515"/>
+    <text x="846" y="613">Datasets</text>
+  </g>
+</svg>
