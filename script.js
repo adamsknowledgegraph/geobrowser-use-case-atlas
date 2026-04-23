@@ -279,6 +279,44 @@ function renderCases(filter = "All") {
   observeReveals();
 }
 
+function initMobileNav() {
+  const header = document.querySelector(".site-header");
+  const toggle = document.querySelector(".menu-toggle");
+  const menu = document.querySelector("#mobile-nav");
+
+  if (!header || !toggle || !menu) return;
+
+  const setMenuState = (isOpen) => {
+    header.classList.toggle("is-menu-open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+    menu.hidden = !isOpen;
+    document.body.classList.toggle("mobile-nav-open", isOpen);
+  };
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    setMenuState(!isOpen);
+  });
+
+  menu.addEventListener("click", (event) => {
+    if (event.target.closest("a")) setMenuState(false);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (menu.hidden) return;
+    if (!header.contains(event.target)) setMenuState(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenuState(false);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700) setMenuState(false);
+  });
+}
+
 let observer;
 function observeReveals() {
   if (observer) observer.disconnect();
@@ -297,5 +335,6 @@ function observeReveals() {
   document.querySelectorAll(".reveal").forEach((node) => observer.observe(node));
 }
 
+initMobileNav();
 renderFilters();
 renderCases();
