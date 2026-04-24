@@ -43,6 +43,7 @@ const cases = [
     nativeHeadline: "People with work and contributions in context.",
     bannerHeadline: "See a person with projects, past experience, and contributions in context.",
     nativePreviewImage: "./assets/previews/geo-people-native.png",
+    launchStatus: "Not yet launched",
   },
   {
     label: "Understand Iran War",
@@ -248,6 +249,11 @@ function createGeoNativeCard(item) {
           : ""
       }
       <span class="geo-native-card-label">${item.label}</span>
+      ${
+        item.launchStatus
+          ? `<span class="geo-native-card-status">${item.launchStatus}</span>`
+          : ""
+      }
     </span>
     <h4>${item.nativeHeadline || item.bannerHeadline || item.title}</h4>
     <p>${item.chips.slice(0, 3).join(" · ")}</p>

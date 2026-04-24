@@ -1152,18 +1152,8 @@ body.early-access-open {
 }
 
 .graph-journey[data-static="true"] .graph-journey-steps {
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(252px, 312px);
-  grid-template-columns: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 24px;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  padding: 2px 6px 8px 0;
-  scrollbar-width: none;
-}
-
-.graph-journey[data-static="true"] .graph-journey-steps::-webkit-scrollbar {
-  display: none;
 }
 
 .graph-journey[data-static="true"] .journey-step::before {
@@ -2120,6 +2110,26 @@ body.early-access-open {
   font-size: 11px;
   font-weight: 850;
   line-height: 1;
+}
+
+.geo-native-card-status {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  padding: 7px 10px 5px;
+  border: 1px solid rgba(21, 21, 21, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink-soft);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .geo-native-card h4 {
@@ -3085,8 +3095,17 @@ body.early-access-open {
   }
 
   .graph-journey[data-static="true"] .graph-journey-steps {
+    grid-auto-flow: column;
     grid-auto-columns: minmax(214px, 264px);
-    padding-bottom: 10px;
+    grid-template-columns: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding: 2px 6px 10px 0;
+    scrollbar-width: none;
+  }
+
+  .graph-journey[data-static="true"] .graph-journey-steps::-webkit-scrollbar {
+    display: none;
   }
 
   .journey-step {
