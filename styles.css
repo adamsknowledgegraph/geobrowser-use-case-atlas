@@ -734,6 +734,50 @@ h3 {
   line-height: 1.16;
 }
 
+.journey-caption {
+  margin-top: 22px;
+  padding: 18px 20px 18px;
+  border: 1px solid rgba(21, 21, 21, 0.12);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.7)),
+    rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.06);
+}
+
+.journey-caption-kicker {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  padding: 7px 10px 5px;
+  border-radius: 999px;
+  background: rgba(216, 255, 54, 0.18);
+  color: #718a00;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.journey-caption-title {
+  display: block;
+  margin-top: 14px;
+  color: var(--ink);
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 850;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.journey-caption-copy {
+  max-width: 34ch;
+  margin-top: 10px;
+  color: var(--ink-soft);
+  font-size: 17px;
+  line-height: 1.18;
+}
+
 .graph-journey-steps {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -948,7 +992,7 @@ h3 {
   top: 0;
   height: 2px;
   width: 0;
-  background: rgba(21, 21, 21, 0.42);
+  background: rgba(21, 21, 21, 0.4);
   transform-origin: 0 50%;
   opacity: 0;
 }
@@ -990,11 +1034,14 @@ h3 {
   top: 0;
   z-index: 2;
   transform-origin: center center;
-  will-change: transform, opacity;
+  transition:
+    opacity 220ms ease,
+    filter 220ms ease;
+  will-change: transform, opacity, filter;
 }
 
 .journey-node-card {
-  width: clamp(170px, 16vw, 238px);
+  width: clamp(176px, 15vw, 232px);
   padding: 14px 16px 16px;
   border: 1px solid rgba(21, 21, 21, 0.08);
   border-radius: 28px;
@@ -1060,6 +1107,15 @@ h3 {
   z-index: 4;
 }
 
+.journey-node-company {
+  z-index: 4;
+  width: clamp(208px, 18vw, 268px);
+}
+
+.journey-node-company strong {
+  font-size: clamp(30px, 2.6vw, 42px);
+}
+
 .journey-node-verification,
 .journey-node-editor {
   z-index: 3;
@@ -1071,6 +1127,16 @@ h3 {
 
 .journey-node-editor {
   width: clamp(164px, 13vw, 196px);
+}
+
+.journey-node-topic {
+  z-index: 3;
+}
+
+.journey-node-person,
+.journey-node-source,
+.journey-node-place {
+  z-index: 2;
 }
 
 .tone-blue {
@@ -2470,6 +2536,18 @@ h3 {
 
   .graph-journey-intro {
     font-size: 18px;
+  }
+
+  .journey-caption {
+    padding: 16px;
+  }
+
+  .journey-caption-title {
+    font-size: clamp(21px, 6vw, 28px);
+  }
+
+  .journey-caption-copy {
+    font-size: 15px;
   }
 
   .graph-journey-steps {

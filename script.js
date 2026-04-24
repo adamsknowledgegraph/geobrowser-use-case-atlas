@@ -421,111 +421,59 @@ function lerp(start, end, amount) {
   return start + (end - start) * amount;
 }
 
-function interpolateJourneyState(keyframes, points, progress) {
-  if (progress <= points[0]) return keyframes[0];
-  if (progress >= points[points.length - 1]) return keyframes[keyframes.length - 1];
-
-  for (let index = 0; index < points.length - 1; index += 1) {
-    const start = points[index];
-    const end = points[index + 1];
-
-    if (progress <= end) {
-      const mix = clamp((progress - start) / (end - start));
-      const from = keyframes[index];
-      const to = keyframes[index + 1];
-      return {
-        x: lerp(from.x, to.x, mix),
-        y: lerp(from.y, to.y, mix),
-        opacity: lerp(from.opacity ?? 1, to.opacity ?? 1, mix),
-        scale: lerp(from.scale ?? 1, to.scale ?? 1, mix),
-        rotate: lerp(from.rotate ?? 0, to.rotate ?? 0, mix),
-      };
-    }
-  }
-
-  return keyframes[keyframes.length - 1];
-}
-
 function initGraphJourney() {
   const section = document.querySelector(".graph-journey");
   const scene = document.querySelector("#journey-scene");
   if (!section || !scene) return;
 
   const stepNodes = [...section.querySelectorAll(".journey-step")];
+  const captionKicker = section.querySelector(".journey-caption-kicker");
+  const captionTitle = section.querySelector(".journey-caption-title");
+  const captionCopy = section.querySelector(".journey-caption-copy");
   const nodeElements = new Map(
     [...scene.querySelectorAll(".journey-node")].map((node) => [node.dataset.node, node]),
   );
   const edgeElements = [...scene.querySelectorAll(".journey-edge")];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const framePoints = [0, 0.32, 0.66, 1];
-  const stagePoints = [0, 0.34, 0.68, 1];
+  const stagePoints = [0, 0.42, 0.7, 1];
+  const stages = [
+    {
+      kicker: "Entities",
+      title: "Entities are the things in the graph.",
+      copy:
+        "People, companies, places, claims, and sources each become structured objects you can keep connecting.",
+    },
+    {
+      kicker: "Relationships",
+      title: "Relationships explain the context.",
+      copy:
+        "The labeled lines show how those entities relate: who leads what, what a claim is about, where it came from, and how it is checked.",
+    },
+    {
+      kicker: "Outputs",
+      title: "The same graph can power useful apps.",
+      copy:
+        "Once the entities and relationships are in place, the same graph can drive profile pages, timelines, and search.",
+    },
+  ];
+  const staticCaption = {
+    kicker: "Entities + relationships",
+    title: "Entities are the cards. Relationships are the labeled lines.",
+    copy:
+      "People, companies, places, claims, and sources can live in one connected graph, then power many different interfaces.",
+  };
   const nodeStates = {
-    topic: [
-      { x: 0.11, y: 0.2, opacity: 0.44, scale: 0.9, rotate: -8 },
-      { x: 0.2, y: 0.22, opacity: 1, scale: 1, rotate: -1 },
-      { x: 0.18, y: 0.21, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.17, y: 0.18, opacity: 0.88, scale: 0.97, rotate: -1 },
-    ],
-    company: [
-      { x: 0.48, y: 0.44, opacity: 0.56, scale: 0.92, rotate: -2 },
-      { x: 0.5, y: 0.44, opacity: 1, scale: 1.04, rotate: 0 },
-      { x: 0.48, y: 0.45, opacity: 1, scale: 1.04, rotate: 0 },
-      { x: 0.38, y: 0.43, opacity: 1, scale: 1.02, rotate: 0 },
-    ],
-    person: [
-      { x: 0.12, y: 0.74, opacity: 0.42, scale: 0.9, rotate: 6 },
-      { x: 0.22, y: 0.68, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.21, y: 0.67, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.17, y: 0.64, opacity: 0.62, scale: 0.95, rotate: 0 },
-    ],
-    source: [
-      { x: 0.84, y: 0.16, opacity: 0.38, scale: 0.88, rotate: -6 },
-      { x: 0.75, y: 0.21, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.73, y: 0.2, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.3, y: 0.17, opacity: 0.76, scale: 0.95, rotate: 0 },
-    ],
-    claim: [
-      { x: 0.84, y: 0.48, opacity: 0.4, scale: 0.88, rotate: 4 },
-      { x: 0.72, y: 0.49, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.7, y: 0.46, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.57, y: 0.42, opacity: 0.96, scale: 0.98, rotate: 0 },
-    ],
-    place: [
-      { x: 0.86, y: 0.82, opacity: 0.36, scale: 0.88, rotate: -4 },
-      { x: 0.73, y: 0.76, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.71, y: 0.75, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.42, y: 0.79, opacity: 0.7, scale: 0.95, rotate: 0 },
-    ],
-    editor: [
-      { x: 0.08, y: 0.52, opacity: 0, scale: 0.78, rotate: -10 },
-      { x: 0.08, y: 0.52, opacity: 0, scale: 0.82, rotate: -8 },
-      { x: 0.14, y: 0.49, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.12, y: 0.48, opacity: 0.16, scale: 0.88, rotate: -6 },
-    ],
-    verification: [
-      { x: 0.48, y: 0.08, opacity: 0, scale: 0.78, rotate: -4 },
-      { x: 0.48, y: 0.08, opacity: 0, scale: 0.82, rotate: -2 },
-      { x: 0.46, y: 0.14, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.42, y: 0.11, opacity: 0.15, scale: 0.88, rotate: 0 },
-    ],
-    "app-profile": [
-      { x: 0.9, y: 0.2, opacity: 0, scale: 0.82, rotate: 3 },
-      { x: 0.9, y: 0.2, opacity: 0, scale: 0.82, rotate: 2 },
-      { x: 0.88, y: 0.2, opacity: 0.08, scale: 0.84, rotate: 2 },
-      { x: 0.83, y: 0.2, opacity: 1, scale: 1, rotate: 0 },
-    ],
-    "app-timeline": [
-      { x: 0.9, y: 0.46, opacity: 0, scale: 0.82, rotate: 2 },
-      { x: 0.9, y: 0.46, opacity: 0, scale: 0.82, rotate: 2 },
-      { x: 0.88, y: 0.46, opacity: 0.08, scale: 0.84, rotate: 1 },
-      { x: 0.83, y: 0.46, opacity: 1, scale: 1, rotate: 0 },
-    ],
-    "app-search": [
-      { x: 0.9, y: 0.71, opacity: 0, scale: 0.82, rotate: 1 },
-      { x: 0.9, y: 0.71, opacity: 0, scale: 0.82, rotate: 1 },
-      { x: 0.88, y: 0.71, opacity: 0.08, scale: 0.84, rotate: 1 },
-      { x: 0.83, y: 0.71, opacity: 1, scale: 1, rotate: 0 },
-    ],
+    topic: { x: 0.18, y: 0.18, appear: 0, full: 0.06, scale: 0.92, blur: 14 },
+    company: { x: 0.46, y: 0.42, appear: 0.05, full: 0.11, scale: 0.92, blur: 16 },
+    person: { x: 0.18, y: 0.64, appear: 0.1, full: 0.16, scale: 0.92, blur: 14 },
+    claim: { x: 0.71, y: 0.49, appear: 0.15, full: 0.21, scale: 0.92, blur: 14 },
+    source: { x: 0.75, y: 0.18, appear: 0.2, full: 0.26, scale: 0.92, blur: 14 },
+    place: { x: 0.77, y: 0.79, appear: 0.25, full: 0.31, scale: 0.92, blur: 14 },
+    editor: { x: 0.12, y: 0.46, appear: 0.44, full: 0.5, scale: 0.88, blur: 16 },
+    verification: { x: 0.46, y: 0.11, appear: 0.5, full: 0.56, scale: 0.88, blur: 16 },
+    "app-profile": { x: 0.88, y: 0.21, appear: 0.72, full: 0.78, scale: 0.9, blur: 14 },
+    "app-timeline": { x: 0.88, y: 0.49, appear: 0.8, full: 0.86, scale: 0.9, blur: 14 },
+    "app-search": { x: 0.86, y: 0.78, appear: 0.88, full: 0.94, scale: 0.9, blur: 14 },
   };
 
   let ticking = false;
@@ -542,6 +490,13 @@ function initGraphJourney() {
       (progress - stagePoints[index]) /
         Math.max((stagePoints[index + 1] ?? 1) - stagePoints[index], 0.001),
     );
+
+  const setCaption = (activeIndex) => {
+    const current = staticMode ? staticCaption : stages[activeIndex];
+    if (captionKicker) captionKicker.textContent = current.kicker;
+    if (captionTitle) captionTitle.textContent = current.title;
+    if (captionCopy) captionCopy.textContent = current.copy;
+  };
 
   const setStepState = (progress, activeIndex) => {
     if (staticMode) {
@@ -562,7 +517,8 @@ function initGraphJourney() {
     });
   };
 
-  const edgeProgress = (progress, start, end) => clamp((progress - start) / Math.max(end - start, 0.001));
+  const edgeProgress = (progress, start, end) =>
+    clamp((progress - start) / Math.max(end - start, 0.001));
 
   const update = () => {
     const shouldUseStatic = window.innerWidth <= 1050 || reducedMotion.matches;
@@ -577,7 +533,7 @@ function initGraphJourney() {
     const progress = staticMode
       ? 1
       : clamp(
-          (window.scrollY - section.offsetTop + window.innerHeight * 0.16) /
+          (window.scrollY - section.offsetTop + window.innerHeight * 0.3) /
             Math.max(section.offsetHeight - window.innerHeight, 1),
         );
     const activeStageIndex = getActiveStageIndex(progress);
@@ -590,21 +546,26 @@ function initGraphJourney() {
       const element = nodeElements.get(id);
       if (!element) return;
 
-      const state = interpolateJourneyState(keyframes, framePoints, progress);
+      const reveal = staticMode ? 1 : edgeProgress(progress, keyframes.appear, keyframes.full);
       const width = element.offsetWidth;
       const height = element.offsetHeight;
-      const x = state.x * sceneWidth;
-      const y = state.y * sceneHeight;
+      const x = keyframes.x * sceneWidth;
+      const y = keyframes.y * sceneHeight;
+      const scale = lerp(keyframes.scale ?? 0.92, 1, reveal);
+      const lift = (1 - reveal) * 18;
+      const opacity = clamp(reveal * 1.35);
+      const blur = (1 - reveal) * (keyframes.blur ?? 12);
 
-      element.style.transform = `translate(${x - width / 2}px, ${y - height / 2}px) scale(${state.scale ?? 1}) rotate(${state.rotate ?? 0}deg)`;
-      element.style.opacity = String(state.opacity ?? 1);
+      element.style.transform = `translate(${x - width / 2}px, ${y - height / 2 + lift}px) scale(${scale})`;
+      element.style.opacity = String(opacity);
+      element.style.filter = `blur(${blur}px)`;
 
       centers[id] = {
         x,
         y,
-        width: width * (state.scale ?? 1),
-        height: height * (state.scale ?? 1),
-        opacity: state.opacity ?? 1,
+        width: width * scale,
+        height: height * scale,
+        opacity,
       };
     });
 
@@ -614,22 +575,8 @@ function initGraphJourney() {
       if (!from || !to) return;
 
       const reveal = edgeProgress(progress, Number(edge.dataset.appear), Number(edge.dataset.full));
-      const edgeStage = Number(edge.dataset.stage || 0);
-      let visibility = reveal * Math.min(from.opacity, to.opacity);
-      let labelVisibility = visibility;
-
-      if (!staticMode) {
-        if (edgeStage < activeStageIndex) {
-          visibility *= activeStageIndex === 2 ? 0.18 : 0.58;
-          labelVisibility = activeStageIndex === 2 ? 0 : visibility * 0.24;
-        } else if (edgeStage > activeStageIndex) {
-          visibility *= 0.03;
-          labelVisibility = 0;
-        } else {
-          visibility *= 1.08;
-          labelVisibility = clamp(visibility * 1.18);
-        }
-      }
+      const visibility = (staticMode ? 1 : reveal) * Math.min(from.opacity, to.opacity);
+      const labelVisibility = clamp((reveal - 0.35) / 0.45) * clamp(Math.min(from.opacity, to.opacity) * 1.1);
 
       if (visibility <= 0.01) {
         edge.style.opacity = "0";
@@ -654,6 +601,7 @@ function initGraphJourney() {
       edge.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}rad) scaleX(${reveal})`;
     });
 
+    setCaption(activeStageIndex);
     setStepState(progress, activeStageIndex);
     ticking = false;
   };
