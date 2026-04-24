@@ -1,6 +1,7 @@
 const cases = [
   {
     label: "Geo Podcasts",
+    isGeoNative: true,
     category: "Media",
     tag: "Conversation graph",
     title: "Podcasts become a searchable graph of episodes, topics, people, and ideas.",
@@ -9,9 +10,11 @@ const cases = [
     url: "https://podcasts.geobrowser.io/",
     tone: "pink",
     chips: ["Episode search", "Guests", "Topics", "Shows"],
+    bannerHeadline: "Search episodes, guests, topics, and ideas.",
   },
   {
     label: "Geo News",
+    isGeoNative: true,
     category: "Media",
     tag: "Story graph",
     title: "News becomes a linked graph of stories, topics, timelines, and sources.",
@@ -20,9 +23,11 @@ const cases = [
     url: "https://news.geobrowser.io/",
     tone: "blue",
     chips: ["Story pages", "Timelines", "Sources", "Topics"],
+    bannerHeadline: "Browse stories, timelines, topics, and sources in one place.",
   },
   {
     label: "Geo People",
+    isGeoNative: true,
     category: "Community",
     tag: "People page",
     title: "People pages become richer profiles with projects, past experience, and contributions in context.",
@@ -31,6 +36,7 @@ const cases = [
     url: "https://people.geobrowser.io/",
     tone: "purple",
     chips: ["Projects", "Past experience", "Contributions", "Context"],
+    bannerHeadline: "See a person with projects, past experience, and contributions in context.",
   },
   {
     label: "Understand Iran War",
@@ -151,6 +157,9 @@ const cases = [
   },
 ];
 
+const geoApps = cases.filter((item) => item.isGeoNative);
+const communityCases = cases.filter((item) => !item.isGeoNative);
+
 const filters = [
   "All",
   "Claims",
@@ -161,16 +170,17 @@ const filters = [
   "Education",
   "Community",
   "Media",
-].filter((filter) => filter === "All" || cases.some((item) => item.category === filter));
+].filter((filter) => filter === "All" || communityCases.some((item) => item.category === filter));
 const icon = `
   <svg viewBox="0 0 20 20" aria-hidden="true">
     <path d="M7 7h6v6M13 7 6 14" />
   </svg>
 `;
 
-function fallbackMarkup(item) {
+function fallbackMarkup(item, options = {}) {
+  const compactClass = options.compact ? " is-compact" : "";
   return `
-    <div class="preview-art ${item.category.toLowerCase().replaceAll(" ", "-")}">
+    <div class="preview-art${compactClass} ${item.category.toLowerCase().replaceAll(" ", "-")}">
       <span class="art-line art-line-a"></span>
       <span class="art-line art-line-b"></span>
       <span class="art-line art-line-c"></span>
@@ -218,14 +228,67 @@ function previewMarkup(item) {
   `;
 }
 
-function createCasePanel(item, index) {
+function geoAppPreviewMarkup(item) {
+  return `
+    <div class="geo-app-preview-shell">
+      <div class="geo-app-browser-top" aria-hidden="true">
+        <span></span><span></span><span></span>
+        <em>${new URL(item.url).hostname}</em>
+      </div>
+      <div class="geo-app-preview-fallback">
+        ${fallbackMarkup(item, { compact: true })}
+      </div>
+      ${
+        item.previewImage
+          ? `<img
+              class="geo-app-preview-image"
+              src="${item.previewImage}"
+              alt="${item.label} preview"
+              loading="lazy"
+              onerror="this.remove()"
+            />`
+          : `<iframe
+              class="geo-app-frame"
+              title="${item.label} preview"
+              src="${item.url}"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+            ></iframe>`
+      }
+    </div>
+  `;
+}
+
+function createGeoAppCard(item) {
+  const link = document.createElement("a");
+  link.className = "geo-app-card";
+  link.dataset.tone = item.tone;
+  link.href = item.url;
+  link.target = "_blank";
+  link.rel = "noreferrer";
+  link.innerHTML = `
+    ${geoAppPreviewMarkup(item)}
+    <div class="geo-app-card-overlay">
+      <span class="geo-app-card-label">${item.label}</span>
+      <span class="geo-app-card-domain">${new URL(item.url).hostname}</span>
+      <h4>${item.bannerHeadline || item.title}</h4>
+      <span class="geo-app-card-open">
+        <span>Open app</span>
+        ${icon}
+      </span>
+    </div>
+  `;
+  return link;
+}
+
+function createCasePanel(item, displayIndex) {
   const article = document.createElement("article");
   article.className = "case-panel reveal";
   article.dataset.category = item.category;
   article.dataset.tone = item.tone;
 
   article.innerHTML = `
-    <div class="case-index">${String(index + 1).padStart(2, "0")}</div>
+    <div class="case-index">${String(displayIndex + 1).padStart(2, "0")}</div>
     ${previewMarkup(item)}
     <div class="case-content">
       <div>
@@ -256,6 +319,14 @@ function createCasePanel(item, index) {
   return article;
 }
 
+function renderGeoApps() {
+  const stage = document.querySelector("#geo-apps-grid");
+  if (!stage) return;
+
+  stage.innerHTML = "";
+  geoApps.forEach((item) => stage.appendChild(createGeoAppCard(item)));
+}
+
 function renderFilters() {
   const filterBar = document.querySelector("#filter-bar");
   filterBar.style.setProperty("--filter-count", String(filters.length));
@@ -279,9 +350,12 @@ function renderFilters() {
 
 function renderCases(filter = "All") {
   const stage = document.querySelector("#case-stage");
-  const activeCases = filter === "All" ? cases : cases.filter((item) => item.category === filter);
+  const activeCases =
+    filter === "All"
+      ? communityCases
+      : communityCases.filter((item) => item.category === filter);
   stage.innerHTML = "";
-  activeCases.forEach((item, index) => stage.appendChild(createCasePanel(item, index)));
+  activeCases.forEach((item) => stage.appendChild(createCasePanel(item, cases.indexOf(item))));
   observeReveals();
 }
 
@@ -299,12 +373,11 @@ function setActiveFilter(filter = "All") {
   renderCases(filter);
 }
 
-function scrollToUseCases() {
-  const useCasesSection = document.querySelector("#use-cases");
-  if (!useCasesSection) return;
-
+function scrollToSection(selector = "#use-cases") {
+  const target = document.querySelector(selector);
+  if (!target) return;
   const headerOffset = window.innerWidth <= 1050 ? 88 : 104;
-  const top = Math.max(useCasesSection.getBoundingClientRect().top + window.scrollY - headerOffset, 0);
+  const top = Math.max(target.getBoundingClientRect().top + window.scrollY - headerOffset, 0);
   window.scrollTo({ top, behavior: "smooth" });
 }
 
@@ -313,7 +386,20 @@ function initSpaceCards() {
     card.setAttribute("aria-pressed", "false");
     card.addEventListener("click", () => {
       setActiveFilter(card.dataset.filter || "All");
-      scrollToUseCases();
+      scrollToSection("#use-cases");
+    });
+  });
+
+  document.querySelectorAll(".space-card[data-scroll-target]").forEach((card) => {
+    card.addEventListener("click", () => {
+      document.querySelectorAll("#filter-bar .filter-button").forEach((node) => {
+        node.classList.remove("is-active");
+      });
+      document.querySelectorAll(".space-card[data-filter]").forEach((node) => {
+        node.classList.remove("is-selected");
+        node.setAttribute("aria-pressed", "false");
+      });
+      scrollToSection(`#${card.dataset.scrollTarget}`);
     });
   });
 }
@@ -599,6 +685,7 @@ function observeReveals() {
 
 initMobileNav();
 initGraphJourney();
+renderGeoApps();
 renderFilters();
 initSpaceCards();
 setActiveFilter();
