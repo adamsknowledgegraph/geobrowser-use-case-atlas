@@ -100,10 +100,10 @@ const cases = [
     metrics: ["Diseases", "Cure status", "Categories"],
   },
   {
-    label: "Disease Atlas",
+    label: "Disease Graph Explorer",
     category: "Health",
     tag: "Disease graph",
-    title: "Disease biology, treatments, pathways, and evidence become a source-backed atlas.",
+    title: "Disease biology, treatments, pathways, and evidence become a connected disease graph.",
     summary:
       "A biomedical workbench for moving from a disease to genes, drugs, mechanisms, pathways, and source links without losing provenance.",
     url: "https://adamsknowledgegraph.github.io/hetionet/",
@@ -127,10 +127,10 @@ const cases = [
     previewImage: "./assets/previews/top200ai-preview.png",
   },
   {
-    label: "Geo Atlas",
+    label: "Geo Community Profiles",
     category: "Community",
     tag: "People graph",
-    title: "Community profiles become a living atlas of people, teams, and skills.",
+    title: "Community profiles become a living graph of people, teams, and skills.",
     summary:
       "A constellation for exploring standout Geo profiles, rich bios, teams, categories, and community structure.",
     url: "https://atlas-rouge-nine.vercel.app/",
