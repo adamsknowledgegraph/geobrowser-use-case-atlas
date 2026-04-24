@@ -388,9 +388,9 @@ function initSpaceCards() {
 function initEarlyAccessModal() {
   const modal = document.querySelector("#early-access-modal");
   const form = document.querySelector("#early-access-form");
+  const successPanel = document.querySelector("#early-access-success");
   const status = document.querySelector("#early-access-status");
   const triggers = [...document.querySelectorAll("[data-open-early-access]")];
-  const closeTargets = [...document.querySelectorAll("[data-close-early-access]")];
 
   if (!modal || !form || !triggers.length) return;
 
@@ -398,6 +398,16 @@ function initEarlyAccessModal() {
   const submitLabel = submitButton?.querySelector("span");
   const firstField = form.querySelector('input[name="name"]');
   let lastTrigger = null;
+
+  const showFormState = () => {
+    form.hidden = false;
+    if (successPanel) successPanel.hidden = true;
+  };
+
+  const showSuccessState = () => {
+    form.hidden = true;
+    if (successPanel) successPanel.hidden = false;
+  };
 
   const setStatus = (message, tone = "") => {
     if (!status) return;
@@ -408,6 +418,7 @@ function initEarlyAccessModal() {
 
   const openModal = (trigger) => {
     lastTrigger = trigger || document.activeElement;
+    showFormState();
     modal.hidden = false;
     document.body.classList.add("early-access-open");
     window.requestAnimationFrame(() => {
@@ -418,6 +429,10 @@ function initEarlyAccessModal() {
   const closeModal = () => {
     modal.hidden = true;
     document.body.classList.remove("early-access-open");
+    showFormState();
+    form.reset();
+    const updatesField = form.querySelector('input[name="productUpdates"]');
+    if (updatesField) updatesField.checked = true;
     setStatus("");
     if (lastTrigger instanceof HTMLElement) lastTrigger.focus();
   };
@@ -429,8 +444,9 @@ function initEarlyAccessModal() {
     });
   });
 
-  closeTargets.forEach((target) => {
-    target.addEventListener("click", () => closeModal());
+  modal.addEventListener("click", (event) => {
+    const closeTarget = event.target.closest("[data-close-early-access]");
+    if (closeTarget) closeModal();
   });
 
   document.addEventListener("keydown", (event) => {
@@ -478,12 +494,8 @@ function initEarlyAccessModal() {
         throw new Error(`Request failed with status ${response.status}`);
       }
 
-      form.reset();
-      form.querySelector('input[name="productUpdates"]').checked = true;
-      setStatus("Thanks — we’ve got your details and will be in touch.", "is-success");
-      window.setTimeout(() => {
-        if (!modal.hidden) closeModal();
-      }, 1400);
+      setStatus("");
+      showSuccessState();
     } catch (error) {
       console.error("Early access submission failed", error);
       setStatus("That didn’t go through. Please try again in a moment.", "is-error");
