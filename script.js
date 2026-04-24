@@ -10,6 +10,7 @@ const cases = [
     url: "https://podcasts.geobrowser.io/",
     tone: "pink",
     chips: ["Episode search", "Guests", "Topics", "Shows"],
+    nativeHeadline: "Search podcasts as a graph.",
     bannerHeadline: "Search episodes, guests, topics, and ideas.",
   },
   {
@@ -23,6 +24,7 @@ const cases = [
     url: "https://news.geobrowser.io/",
     tone: "blue",
     chips: ["Story pages", "Timelines", "Sources", "Topics"],
+    nativeHeadline: "Follow stories, topics, and sources.",
     bannerHeadline: "Browse stories, timelines, topics, and sources in one place.",
   },
   {
@@ -36,6 +38,7 @@ const cases = [
     url: "https://people.geobrowser.io/",
     tone: "purple",
     chips: ["Projects", "Past experience", "Contributions", "Context"],
+    nativeHeadline: "People with work and contributions in context.",
     bannerHeadline: "See a person with projects, past experience, and contributions in context.",
   },
   {
@@ -158,7 +161,6 @@ const cases = [
 ];
 
 const geoApps = cases.filter((item) => item.isGeoNative);
-const communityCases = cases.filter((item) => !item.isGeoNative);
 
 const filters = [
   "All",
@@ -170,7 +172,7 @@ const filters = [
   "Education",
   "Community",
   "Media",
-].filter((filter) => filter === "All" || communityCases.some((item) => item.category === filter));
+].filter((filter) => filter === "All" || cases.some((item) => item.category === filter));
 const icon = `
   <svg viewBox="0 0 20 20" aria-hidden="true">
     <path d="M7 7h6v6M13 7 6 14" />
@@ -228,55 +230,24 @@ function previewMarkup(item) {
   `;
 }
 
-function geoAppPreviewMarkup(item) {
-  return `
-    <div class="geo-app-preview-shell">
-      <div class="geo-app-browser-top" aria-hidden="true">
-        <span></span><span></span><span></span>
-        <em>${new URL(item.url).hostname}</em>
-      </div>
-      <div class="geo-app-preview-fallback">
-        ${fallbackMarkup(item, { compact: true })}
-      </div>
-      ${
-        item.previewImage
-          ? `<img
-              class="geo-app-preview-image"
-              src="${item.previewImage}"
-              alt="${item.label} preview"
-              loading="lazy"
-              onerror="this.remove()"
-            />`
-          : `<iframe
-              class="geo-app-frame"
-              title="${item.label} preview"
-              src="${item.url}"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-            ></iframe>`
-      }
-    </div>
-  `;
-}
-
-function createGeoAppCard(item) {
+function createGeoNativeCard(item) {
   const link = document.createElement("a");
-  link.className = "geo-app-card";
+  link.className = "geo-native-card";
   link.dataset.tone = item.tone;
   link.href = item.url;
   link.target = "_blank";
   link.rel = "noreferrer";
   link.innerHTML = `
-    ${geoAppPreviewMarkup(item)}
-    <div class="geo-app-card-overlay">
-      <span class="geo-app-card-label">${item.label}</span>
-      <span class="geo-app-card-domain">${new URL(item.url).hostname}</span>
-      <h4>${item.bannerHeadline || item.title}</h4>
-      <span class="geo-app-card-open">
+    <span class="geo-native-card-label">${item.label}</span>
+    <h4>${item.nativeHeadline || item.bannerHeadline || item.title}</h4>
+    <p>${item.chips.slice(0, 3).join(" · ")}</p>
+    <span class="geo-native-card-footer">
+      <span class="geo-native-card-domain">${new URL(item.url).hostname}</span>
+      <span class="geo-native-card-open">
         <span>Open app</span>
         ${icon}
       </span>
-    </div>
+    </span>
   `;
   return link;
 }
@@ -320,11 +291,11 @@ function createCasePanel(item, displayIndex) {
 }
 
 function renderGeoApps() {
-  const stage = document.querySelector("#geo-apps-grid");
+  const stage = document.querySelector("#geo-native-list");
   if (!stage) return;
 
   stage.innerHTML = "";
-  geoApps.forEach((item) => stage.appendChild(createGeoAppCard(item)));
+  geoApps.forEach((item) => stage.appendChild(createGeoNativeCard(item)));
 }
 
 function renderFilters() {
@@ -352,8 +323,8 @@ function renderCases(filter = "All") {
   const stage = document.querySelector("#case-stage");
   const activeCases =
     filter === "All"
-      ? communityCases
-      : communityCases.filter((item) => item.category === filter);
+      ? cases
+      : cases.filter((item) => item.category === filter);
   stage.innerHTML = "";
   activeCases.forEach((item) => stage.appendChild(createCasePanel(item, cases.indexOf(item))));
   observeReveals();
