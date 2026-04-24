@@ -120,7 +120,7 @@ const cases = [
     dataUrl: "https://www.geobrowser.io/space/41e851610e13a19441c4d980f2f2ce6b",
     tone: "yellow",
     chips: ["Papers", "Authors", "Labs", "Research lineage"],
-    previewImage: "./assets/previews/top200ai-preview.png",
+    previewImage: "./assets/previews/top200ai-preview.png?v=20260424",
   },
   {
     label: "Geo Community Profiles",
