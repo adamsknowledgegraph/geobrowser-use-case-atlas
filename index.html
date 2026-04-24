@@ -164,34 +164,162 @@
 
       </section>
 
-      <section class="signal-row" aria-label="How knowledge graphs help">
-        <article class="signal-item">
-          <span>01</span>
-          <h3>Trace</h3>
-          <p class="signal-question">Who said what?</p>
-          <p class="signal-copy">
-            Follow a claim back to the source, see the surrounding context, and check
-            whether it is supported or verified.
-          </p>
-        </article>
-        <article class="signal-item">
-          <span>02</span>
-          <h3>Participate</h3>
-          <p class="signal-question">Can people improve it together?</p>
-          <p class="signal-copy">
-            Members can add sources, challenge claims, refine entities, and keep shared
-            knowledge up to date in public view.
-          </p>
-        </article>
-        <article class="signal-item">
-          <span>03</span>
-          <h3>Build</h3>
-          <p class="signal-question">Can it become a useful product?</p>
-          <p class="signal-copy">
-            Once the data is connected, the same graph can power explainers, maps,
-            dossiers, search tools, and consumer apps.
-          </p>
-        </article>
+      <section class="graph-journey" aria-labelledby="graph-journey-title">
+        <div class="graph-journey-sticky">
+          <div class="graph-journey-copy">
+            <p class="kicker">See the graph form</p>
+            <h3 id="graph-journey-title">Watch separate facts become one connected graph.</h3>
+            <p class="graph-journey-intro">
+              Scroll to see people, companies, sources, claims, places, and topics connect
+              into one shared graph that can be checked, improved, and turned into useful apps.
+            </p>
+            <div class="graph-journey-steps" aria-label="How the graph becomes useful">
+              <article class="journey-step is-active" data-step="0">
+                <span>01</span>
+                <strong>Trace</strong>
+                <p>See who said what, where it came from, and what it relates to.</p>
+              </article>
+              <article class="journey-step" data-step="1">
+                <span>02</span>
+                <strong>Participate</strong>
+                <p>Add sources, challenge claims, and improve the graph together.</p>
+              </article>
+              <article class="journey-step" data-step="2">
+                <span>03</span>
+                <strong>Build</strong>
+                <p>Use the same graph to power timelines, profiles, search, and apps.</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="graph-journey-visual">
+            <div class="journey-scene" id="journey-scene" aria-hidden="true">
+              <div class="journey-edge-layer">
+                <div class="journey-edge" data-from="topic" data-to="company" data-appear="0.06" data-full="0.24">
+                  <span>Category</span>
+                </div>
+                <div class="journey-edge" data-from="person" data-to="company" data-appear="0.08" data-full="0.28">
+                  <span>CEO</span>
+                </div>
+                <div class="journey-edge" data-from="claim" data-to="company" data-appear="0.12" data-full="0.3">
+                  <span>About</span>
+                </div>
+                <div class="journey-edge" data-from="source" data-to="claim" data-appear="0.15" data-full="0.32">
+                  <span>Source</span>
+                </div>
+                <div class="journey-edge" data-from="place" data-to="company" data-appear="0.17" data-full="0.34">
+                  <span>Based in</span>
+                </div>
+                <div class="journey-edge" data-from="editor" data-to="claim" data-appear="0.4" data-full="0.54">
+                  <span>Adds note</span>
+                </div>
+                <div class="journey-edge" data-from="editor" data-to="source" data-appear="0.44" data-full="0.58">
+                  <span>Links source</span>
+                </div>
+                <div class="journey-edge" data-from="verification" data-to="claim" data-appear="0.46" data-full="0.6">
+                  <span>Verified</span>
+                </div>
+                <div class="journey-edge" data-from="company" data-to="app-profile" data-appear="0.72" data-full="0.9">
+                  <span>Profile</span>
+                </div>
+                <div class="journey-edge" data-from="claim" data-to="app-timeline" data-appear="0.74" data-full="0.92">
+                  <span>Timeline</span>
+                </div>
+                <div class="journey-edge" data-from="topic" data-to="app-search" data-appear="0.76" data-full="0.94">
+                  <span>Search</span>
+                </div>
+              </div>
+
+              <article class="journey-node journey-node-card tone-yellow journey-node-topic" data-node="topic">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">T</span>
+                  <span class="journey-node-type">Topic</span>
+                </div>
+                <strong>Prediction markets</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-blue journey-node-company" data-node="company">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">C</span>
+                  <span class="journey-node-type">Company</span>
+                </div>
+                <strong>Polymarket</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-purple journey-node-person" data-node="person">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">P</span>
+                  <span class="journey-node-type">Person</span>
+                </div>
+                <strong>Shayne Coplan</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-green journey-node-source" data-node="source">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">S</span>
+                  <span class="journey-node-type">Source</span>
+                </div>
+                <strong>Company site</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-neutral journey-node-claim" data-node="claim">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">C</span>
+                  <span class="journey-node-type">Claim</span>
+                </div>
+                <strong>Founded in 2020</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-coral journey-node-place" data-node="place">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">L</span>
+                  <span class="journey-node-type">Place</span>
+                </div>
+                <strong>New York City</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-pink journey-node-editor" data-node="editor">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">E</span>
+                  <span class="journey-node-type">Community</span>
+                </div>
+                <strong>Editor adds note</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-neutral journey-node-verification" data-node="verification">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">V</span>
+                  <span class="journey-node-type">Verification</span>
+                </div>
+                <strong>Cross-checked with 3 sources</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-yellow journey-node-app" data-node="app-profile">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">A</span>
+                  <span class="journey-node-type">App</span>
+                </div>
+                <strong>Profile page</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-green journey-node-app" data-node="app-timeline">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">A</span>
+                  <span class="journey-node-type">App</span>
+                </div>
+                <strong>Timeline</strong>
+              </article>
+
+              <article class="journey-node journey-node-card tone-blue journey-node-app" data-node="app-search">
+                <div class="journey-node-head">
+                  <span class="journey-node-mark">A</span>
+                  <span class="journey-node-type">App</span>
+                </div>
+                <strong>Search</strong>
+              </article>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="spaces-section" id="spaces" aria-labelledby="spaces-title">
