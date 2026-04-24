@@ -874,6 +874,21 @@ h3 {
   background: rgba(255, 255, 255, 0.9);
 }
 
+.graph-journey[data-static="true"] .graph-journey-steps {
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(252px, 312px);
+  grid-template-columns: none;
+  margin-top: 24px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding: 2px 6px 8px 0;
+  scrollbar-width: none;
+}
+
+.graph-journey[data-static="true"] .graph-journey-steps::-webkit-scrollbar {
+  display: none;
+}
+
 .graph-journey[data-static="true"] .journey-step::before {
   opacity: 0.58;
   transform: scaleX(1);
@@ -886,10 +901,21 @@ h3 {
 
 .graph-journey[data-static="true"] .journey-step strong {
   color: var(--ink);
+  font-size: clamp(28px, 2.8vw, 36px);
+  line-height: 0.96;
 }
 
 .graph-journey[data-static="true"] .journey-step p {
   color: var(--ink-soft);
+  max-width: 20ch;
+  font-size: 15px;
+  line-height: 1.18;
+}
+
+.graph-journey[data-static="true"] .journey-step {
+  min-height: 214px;
+  padding: 18px 18px 16px;
+  scroll-snap-align: start;
 }
 
 .journey-step span {
@@ -2527,7 +2553,7 @@ h3 {
   }
 
   .graph-journey-steps {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
   }
 
   .journey-step p {
@@ -2714,18 +2740,12 @@ h3 {
   }
 
   .graph-journey-steps {
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(220px, 1fr);
-    grid-template-columns: none;
-    margin-top: 24px;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    padding-bottom: 6px;
-    scrollbar-width: none;
+    gap: 12px;
   }
 
-  .graph-journey-steps::-webkit-scrollbar {
-    display: none;
+  .graph-journey[data-static="true"] .graph-journey-steps {
+    grid-auto-columns: minmax(214px, 264px);
+    padding-bottom: 10px;
   }
 
   .journey-step {
