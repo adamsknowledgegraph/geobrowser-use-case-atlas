@@ -721,17 +721,26 @@ h3 {
 }
 
 .signal-item h3 {
-  margin-top: 54px;
+  margin-top: 42px;
   font-size: clamp(38px, 4vw, 64px);
   font-weight: 880;
   line-height: 0.9;
 }
 
-.signal-item p {
-  max-width: 330px;
+.signal-question {
   margin-top: 18px;
+  color: var(--ink-soft);
+  font-family: "Calibre Semibold", Geist, sans-serif;
+  font-size: 21px;
+  line-height: 1.02;
+}
+
+.signal-copy {
+  max-width: 330px;
+  margin-top: 14px;
   color: var(--muted);
   font-size: 18px;
+  line-height: 1.16;
 }
 
 .video-section {
@@ -1632,6 +1641,10 @@ h3 {
     border-bottom: 1px solid var(--line);
   }
 
+  .signal-question {
+    font-size: 19px;
+  }
+
   .case-panel {
     grid-template-columns: 48px minmax(0, 1fr);
   }
@@ -1816,6 +1829,10 @@ h3 {
 
   .signal-item {
     padding: 26px 16px;
+  }
+
+  .signal-question {
+    font-size: 18px;
   }
 
   .case-panel {
