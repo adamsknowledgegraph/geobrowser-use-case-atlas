@@ -12,6 +12,7 @@ const cases = [
     chips: ["Episode search", "Guests", "Topics", "Shows"],
     nativeHeadline: "Search podcasts as a graph.",
     bannerHeadline: "Search episodes, guests, topics, and ideas.",
+    nativePreviewImage: "./assets/previews/geo-podcasts-native.png",
   },
   {
     label: "Geo News",
@@ -26,6 +27,7 @@ const cases = [
     chips: ["Story pages", "Timelines", "Sources", "Topics"],
     nativeHeadline: "Follow stories, topics, and sources.",
     bannerHeadline: "Browse stories, timelines, topics, and sources in one place.",
+    nativePreviewImage: "./assets/previews/geo-news-native.png",
   },
   {
     label: "Geo People",
@@ -40,6 +42,7 @@ const cases = [
     chips: ["Projects", "Past experience", "Contributions", "Context"],
     nativeHeadline: "People with work and contributions in context.",
     bannerHeadline: "See a person with projects, past experience, and contributions in context.",
+    nativePreviewImage: "./assets/previews/geo-people-native.png",
   },
   {
     label: "Understand Iran War",
@@ -238,7 +241,14 @@ function createGeoNativeCard(item) {
   link.target = "_blank";
   link.rel = "noreferrer";
   link.innerHTML = `
-    <span class="geo-native-card-label">${item.label}</span>
+    <span class="geo-native-card-media">
+      ${
+        item.nativePreviewImage
+          ? `<img src="${item.nativePreviewImage}" alt="${item.label} preview" loading="lazy" />`
+          : ""
+      }
+      <span class="geo-native-card-label">${item.label}</span>
+    </span>
     <h4>${item.nativeHeadline || item.bannerHeadline || item.title}</h4>
     <p>${item.chips.slice(0, 3).join(" · ")}</p>
     <span class="geo-native-card-footer">
