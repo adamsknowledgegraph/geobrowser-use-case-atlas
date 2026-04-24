@@ -186,32 +186,34 @@ function fallbackMarkup(item) {
 function previewMarkup(item) {
   return `
     <div class="case-preview">
-      <div class="browser-top" aria-hidden="true">
-        <span></span><span></span><span></span>
-        <em>${new URL(item.url).hostname}</em>
+      <div class="preview-shell">
+        <div class="browser-top" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <em>${new URL(item.url).hostname}</em>
+        </div>
+        <div class="preview-fallback">
+          ${fallbackMarkup(item)}
+        </div>
+        ${
+          item.previewImage
+            ? `<img
+                class="site-preview-image"
+                src="${item.previewImage}"
+                alt="${item.label} preview"
+                loading="lazy"
+                onerror="this.remove()"
+              />`
+            : item.embed === false
+              ? ""
+              : `<iframe
+                  class="site-frame"
+                  title="${item.label} preview"
+                  src="${item.url}"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                ></iframe>`
+        }
       </div>
-      <div class="preview-fallback">
-        ${fallbackMarkup(item)}
-      </div>
-      ${
-        item.previewImage
-          ? `<img
-              class="site-preview-image"
-              src="${item.previewImage}"
-              alt="${item.label} preview"
-              loading="lazy"
-              onerror="this.remove()"
-            />`
-          : item.embed === false
-            ? ""
-          : `<iframe
-              class="site-frame"
-              title="${item.label} preview"
-              src="${item.url}"
-              loading="lazy"
-              referrerpolicy="no-referrer"
-            ></iframe>`
-      }
     </div>
   `;
 }
