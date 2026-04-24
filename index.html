@@ -124,12 +124,18 @@
                 <path d="M5 10h9M10.5 5.5 15 10l-4.5 4.5" />
               </svg>
             </a>
-            <a class="button ghost" href="https://www.geobrowser.io/" target="_blank" rel="noreferrer">
-              <span>Visit geobrowser.io</span>
+            <button
+              class="button ghost"
+              type="button"
+              data-open-early-access
+              aria-haspopup="dialog"
+              aria-controls="early-access-modal"
+            >
+              <span>Get early access</span>
               <svg viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M7 7h6v6M13 7 6 14" />
               </svg>
-            </a>
+            </button>
           </div>
         </div>
 
@@ -485,12 +491,18 @@
       <section class="movement-cta" aria-labelledby="movement-title">
         <p class="kicker">Join the movement</p>
         <h2 id="movement-title">Knowledge is the answer. Coordination is the interface.</h2>
-        <a class="button primary" href="https://www.geobrowser.io/" target="_blank" rel="noreferrer">
-          <span>Visit geobrowser.io</span>
+        <button
+          class="button primary"
+          type="button"
+          data-open-early-access
+          aria-haspopup="dialog"
+          aria-controls="early-access-modal"
+        >
+          <span>Get early access</span>
           <svg viewBox="0 0 20 20" aria-hidden="true">
             <path d="M7 7h6v6M13 7 6 14" />
           </svg>
-        </a>
+        </button>
       </section>
 
       <section class="video-section" id="videos" aria-labelledby="video-title">
@@ -560,6 +572,82 @@
         </div>
       </section>
     </main>
+
+    <div class="early-access-modal" id="early-access-modal" hidden>
+      <div class="early-access-backdrop" data-close-early-access></div>
+      <div
+        class="early-access-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="early-access-title"
+        aria-describedby="early-access-description"
+      >
+        <button
+          class="early-access-close"
+          type="button"
+          aria-label="Close early access form"
+          data-close-early-access
+        >
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M5 5 15 15M15 5 5 15" />
+          </svg>
+        </button>
+
+        <div class="early-access-copy">
+          <p class="kicker">Get early access</p>
+          <h2 id="early-access-title">Join the Geo early-access list.</h2>
+          <p id="early-access-description">
+            Tell us a bit about yourself and what draws you to Geo. We'll use it to
+            share access and relevant product updates.
+          </p>
+        </div>
+
+        <form class="early-access-form" id="early-access-form">
+          <div class="early-access-field-grid">
+            <label class="early-access-field">
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+            </label>
+
+            <label class="early-access-field">
+              <span>Email</span>
+              <input
+                type="email"
+                name="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
+              />
+            </label>
+          </div>
+
+          <label class="early-access-field">
+            <span>What interests you about Geo?</span>
+            <textarea
+              name="whatInterests"
+              rows="5"
+              placeholder="What kinds of spaces, use cases, or workflows are you excited about?"
+              required
+            ></textarea>
+          </label>
+
+          <label class="early-access-check">
+            <input type="checkbox" name="productUpdates" checked />
+            <span>Receive product updates</span>
+          </label>
+
+          <div class="early-access-actions">
+            <p class="early-access-status" id="early-access-status" role="status" aria-live="polite"></p>
+            <button class="button primary early-access-submit" type="submit">
+              <span>Request access</span>
+              <svg viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M7 7h6v6M13 7 6 14" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <footer class="site-footer">
       <strong>Knowledge is the answer.</strong>

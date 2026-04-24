@@ -472,6 +472,208 @@ h3 {
   color: var(--ink);
 }
 
+body.early-access-open {
+  overflow: hidden;
+}
+
+.early-access-modal[hidden] {
+  display: none;
+}
+
+.early-access-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+}
+
+.early-access-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(21, 21, 21, 0.58);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.early-access-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100% - 32px));
+  max-height: calc(100vh - 36px);
+  margin: 18px auto;
+  padding: 30px 30px 28px;
+  overflow-y: auto;
+  border: 1px solid rgba(21, 21, 21, 0.12);
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 86, 208, 0.12), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(216, 255, 54, 0.16), transparent 34%),
+    rgba(251, 251, 248, 0.98);
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.24);
+}
+
+.early-access-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  transition:
+    background 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.early-access-close svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
+.early-access-close:hover,
+.early-access-close:focus-visible {
+  background: var(--yellow);
+  border-color: rgba(21, 21, 21, 0.2);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.early-access-copy {
+  max-width: 560px;
+}
+
+.early-access-copy h2 {
+  margin-top: 10px;
+  font-size: clamp(38px, 4.4vw, 56px);
+  font-weight: 880;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+
+.early-access-copy p:last-child {
+  max-width: 54ch;
+  margin-top: 18px;
+  color: var(--ink-soft);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.early-access-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.early-access-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.early-access-field {
+  display: grid;
+  gap: 10px;
+}
+
+.early-access-field span,
+.early-access-check span {
+  color: var(--ink);
+  font-family: "Calibre Semibold", Geist, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.early-access-field input,
+.early-access-field textarea {
+  width: 100%;
+  padding: 16px 18px 15px;
+  border: 1px solid rgba(21, 21, 21, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--ink);
+  font: inherit;
+  font-size: 17px;
+  line-height: 1.4;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.early-access-field textarea {
+  min-height: 148px;
+  resize: vertical;
+}
+
+.early-access-field input::placeholder,
+.early-access-field textarea::placeholder {
+  color: rgba(21, 21, 21, 0.44);
+}
+
+.early-access-field input:focus,
+.early-access-field textarea:focus {
+  border-color: rgba(104, 51, 255, 0.42);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(104, 51, 255, 0.1);
+  background: var(--white);
+}
+
+.early-access-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 26px;
+}
+
+.early-access-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--purple);
+}
+
+.early-access-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.early-access-status {
+  min-height: 24px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.early-access-status.is-error {
+  color: #bb2b2b;
+}
+
+.early-access-status.is-success {
+  color: #136d4b;
+}
+
+.early-access-submit {
+  min-width: 198px;
+}
+
+.early-access-submit[disabled] {
+  cursor: wait;
+  opacity: 0.88;
+}
+
 .hero-graph {
   position: absolute;
   inset: 0;
@@ -2663,6 +2865,47 @@ h3 {
 
   .button {
     width: 100%;
+  }
+
+  .early-access-dialog {
+    width: min(100% - 20px, 720px);
+    max-height: calc(100vh - 20px);
+    margin: 10px auto;
+    padding: 22px 18px 20px;
+    border-radius: 14px;
+  }
+
+  .early-access-copy h2 {
+    font-size: clamp(34px, 10vw, 46px);
+  }
+
+  .early-access-copy p:last-child {
+    font-size: 18px;
+  }
+
+  .early-access-field-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .early-access-field span,
+  .early-access-check span {
+    font-size: 17px;
+  }
+
+  .early-access-field input,
+  .early-access-field textarea {
+    font-size: 16px;
+  }
+
+  .early-access-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .early-access-submit {
+    width: 100%;
+    min-width: 0;
   }
 
   .hero-preview-stack {

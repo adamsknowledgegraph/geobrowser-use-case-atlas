@@ -385,6 +385,115 @@ function initSpaceCards() {
   });
 }
 
+function initEarlyAccessModal() {
+  const modal = document.querySelector("#early-access-modal");
+  const form = document.querySelector("#early-access-form");
+  const status = document.querySelector("#early-access-status");
+  const triggers = [...document.querySelectorAll("[data-open-early-access]")];
+  const closeTargets = [...document.querySelectorAll("[data-close-early-access]")];
+
+  if (!modal || !form || !triggers.length) return;
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  const submitLabel = submitButton?.querySelector("span");
+  const firstField = form.querySelector('input[name="name"]');
+  let lastTrigger = null;
+
+  const setStatus = (message, tone = "") => {
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove("is-error", "is-success");
+    if (tone) status.classList.add(tone);
+  };
+
+  const openModal = (trigger) => {
+    lastTrigger = trigger || document.activeElement;
+    modal.hidden = false;
+    document.body.classList.add("early-access-open");
+    window.requestAnimationFrame(() => {
+      firstField?.focus();
+    });
+  };
+
+  const closeModal = () => {
+    modal.hidden = true;
+    document.body.classList.remove("early-access-open");
+    setStatus("");
+    if (lastTrigger instanceof HTMLElement) lastTrigger.focus();
+  };
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      openModal(trigger);
+    });
+  });
+
+  closeTargets.forEach((target) => {
+    target.addEventListener("click", () => closeModal());
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.hidden) closeModal();
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!submitButton || !submitLabel) return;
+
+    const formData = new FormData(form);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const whatInterests = String(formData.get("whatInterests") || "").trim();
+    const wantsUpdates = formData.get("productUpdates") === "on";
+
+    setStatus("");
+    submitButton.disabled = true;
+    submitLabel.textContent = "Sending...";
+
+    try {
+      const payload = {
+        formType: "portfolio_early_access",
+        name,
+        email,
+        interest: [],
+        interestOther: whatInterests,
+        skills: wantsUpdates ? ["Receive product updates"] : [],
+        roles: ["Portfolio guest"],
+        roleOther: "",
+        source: "graphgeo.com",
+        notes: whatInterests,
+        receiveProductUpdates: wantsUpdates,
+      };
+
+      const response = await fetch("https://www.geobrowser.io/api/submit-form", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      form.reset();
+      form.querySelector('input[name="productUpdates"]').checked = true;
+      setStatus("Thanks — we’ve got your details and will be in touch.", "is-success");
+      window.setTimeout(() => {
+        if (!modal.hidden) closeModal();
+      }, 1400);
+    } catch (error) {
+      console.error("Early access submission failed", error);
+      setStatus("That didn’t go through. Please try again in a moment.", "is-error");
+    } finally {
+      submitButton.disabled = false;
+      submitLabel.textContent = "Request access";
+    }
+  });
+}
+
 function initMobileNav() {
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".menu-toggle");
@@ -653,6 +762,7 @@ function observeReveals() {
 }
 
 initMobileNav();
+initEarlyAccessModal();
 initGraphJourney();
 renderGeoApps();
 renderFilters();
