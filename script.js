@@ -273,6 +273,7 @@ function createCasePanel(item, index) {
 
 function renderFilters() {
   const filterBar = document.querySelector("#filter-bar");
+  filterBar.style.setProperty("--filter-count", String(filters.length));
   filterBar.innerHTML = filters
     .map(
       (filter) => `

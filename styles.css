@@ -1004,9 +1004,10 @@ h3 {
   position: sticky;
   z-index: 10;
   top: 92px;
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(var(--filter-count, 1), minmax(0, 1fr));
+  gap: 10px;
+  overflow: visible;
   padding: 10px 0 18px;
   background: linear-gradient(var(--paper) 72%, rgba(241, 241, 241, 0));
   scrollbar-width: none;
@@ -1017,8 +1018,11 @@ h3 {
 }
 
 .filter-button {
-  flex: 0 0 auto;
+  display: inline-flex;
   min-height: 40px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   padding: 11px 15px 9px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -1026,6 +1030,9 @@ h3 {
   color: var(--ink);
   font-size: 14px;
   font-weight: 800;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
   transition:
     background 160ms ease,
     color 160ms ease,
@@ -1533,6 +1540,17 @@ h3 {
 }
 
 @media (max-width: 1050px) {
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+
+  .filter-button {
+    width: auto;
+    flex: 0 0 auto;
+  }
+
   .hero {
     display: grid;
     grid-template-columns: 1fr;
