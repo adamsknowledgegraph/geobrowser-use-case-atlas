@@ -5,7 +5,7 @@ A dependency-free portfolio page for Geo-powered knowledge graph examples.
 Published URL:
 
 ```txt
-https://adamsknowledgegraph.github.io/geobrowser-use-case-atlas/
+https://graphgeo.com/
 ```
 
 ## Run locally
