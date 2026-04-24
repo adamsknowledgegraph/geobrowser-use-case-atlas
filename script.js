@@ -24,13 +24,13 @@ const cases = [
   {
     label: "Geo People",
     category: "Community",
-    tag: "Structured portfolio",
-    title: "People and projects become portfolios with contributions you can trace.",
+    tag: "People page",
+    title: "People pages become richer profiles with projects, past experience, and contributions in context.",
     summary:
-      "Profiles connect work, education, speaking, posts, projects, and key contributions as structured public knowledge.",
+      "Each profile connects work history, education, speaking, posts, projects, and key contributions so you can quickly understand who someone is and what they've worked on.",
     url: "https://people.geobrowser.io/",
     tone: "purple",
-    chips: ["Profiles", "Projects", "Contributions", "Public portfolio"],
+    chips: ["Projects", "Past experience", "Contributions", "Context"],
   },
   {
     label: "Understand Iran War",
