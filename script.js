@@ -288,9 +288,7 @@ function renderFilters() {
     const button = event.target.closest("button");
     if (!button) return;
 
-    filterBar.querySelectorAll("button").forEach((node) => node.classList.remove("is-active"));
-    button.classList.add("is-active");
-    renderCases(button.dataset.filter);
+    setActiveFilter(button.dataset.filter);
   });
 }
 
@@ -300,6 +298,39 @@ function renderCases(filter = "All") {
   stage.innerHTML = "";
   activeCases.forEach((item, index) => stage.appendChild(createCasePanel(item, index)));
   observeReveals();
+}
+
+function setActiveFilter(filter = "All") {
+  document.querySelectorAll("#filter-bar .filter-button").forEach((node) => {
+    node.classList.toggle("is-active", node.dataset.filter === filter);
+  });
+
+  document.querySelectorAll(".space-card[data-filter]").forEach((node) => {
+    const isSelected = node.dataset.filter === filter;
+    node.classList.toggle("is-selected", isSelected);
+    node.setAttribute("aria-pressed", String(isSelected));
+  });
+
+  renderCases(filter);
+}
+
+function scrollToUseCases() {
+  const useCasesSection = document.querySelector("#use-cases");
+  if (!useCasesSection) return;
+
+  const headerOffset = window.innerWidth <= 1050 ? 88 : 104;
+  const top = Math.max(useCasesSection.getBoundingClientRect().top + window.scrollY - headerOffset, 0);
+  window.scrollTo({ top, behavior: "smooth" });
+}
+
+function initSpaceCards() {
+  document.querySelectorAll(".space-card[data-filter]").forEach((card) => {
+    card.setAttribute("aria-pressed", "false");
+    card.addEventListener("click", () => {
+      setActiveFilter(card.dataset.filter || "All");
+      scrollToUseCases();
+    });
+  });
 }
 
 function initMobileNav() {
@@ -584,4 +615,5 @@ function observeReveals() {
 initMobileNav();
 initGraphJourney();
 renderFilters();
-renderCases();
+initSpaceCards();
+setActiveFilter();
