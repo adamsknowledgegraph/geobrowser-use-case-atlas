@@ -8,8 +8,7 @@ const cases = [
       "Episode metadata, topics, guests, shows, and current conversations become a browsable knowledge layer.",
     url: "https://podcasts.geobrowser.io/",
     tone: "pink",
-    objects: ["Episodes", "Guests", "Topics", "Shows"],
-    metrics: ["Episodes", "Topics", "People"],
+    chips: ["Episode search", "Guests", "Topics", "Shows"],
   },
   {
     label: "Geo News",
@@ -20,8 +19,7 @@ const cases = [
       "Current events are organized into topic spaces, source-backed story pages, featured timelines, and related entities.",
     url: "https://news.geobrowser.io/",
     tone: "blue",
-    objects: ["Stories", "Topics", "Sources", "Timelines"],
-    metrics: ["Stories", "Topics", "Sources"],
+    chips: ["Story pages", "Timelines", "Sources", "Topics"],
   },
   {
     label: "Geo People",
@@ -32,8 +30,7 @@ const cases = [
       "Profiles connect work, education, speaking, posts, projects, and key contributions as structured public knowledge.",
     url: "https://people.geobrowser.io/",
     tone: "purple",
-    objects: ["Profiles", "Work", "Projects", "Contributions"],
-    metrics: ["Work", "Projects", "Contributions"],
+    chips: ["Profiles", "Projects", "Contributions", "Public portfolio"],
   },
   {
     label: "Understand Iran War",
@@ -45,8 +42,7 @@ const cases = [
     url: "https://understandiranwar.com/",
     dataUrl: "https://www.geobrowser.io/space/f65885c9012be9a9201ddeb6e8c92b61",
     tone: "blue",
-    objects: ["Claims", "Maps", "Actors", "Source trails"],
-    metrics: ["Claims", "Sources", "Maps"],
+    chips: ["Claims", "Maps", "Sources", "Context"],
   },
   {
     label: "TheyDebated",
@@ -57,8 +53,7 @@ const cases = [
       "A debate interface where visible agent identities, source receipts, and contested claims are structured into an inspectable graph.",
     url: "https://theydebated.com/",
     tone: "coral",
-    objects: ["Speakers", "Claims", "Sources", "Rebuttals"],
-    metrics: ["49 claims", "3 agents", "Source receipts"],
+    chips: ["AI debate", "Claims", "Rebuttals", "Sources"],
   },
   {
     label: "OSINT Globe",
@@ -69,8 +64,7 @@ const cases = [
       "A live geospatial intelligence surface combining open infrastructure data, active events, and signal layers in one operational view.",
     url: "https://osint.graphatlas.tech/",
     tone: "yellow",
-    objects: ["Assets", "Events", "Flights", "Signal layers"],
-    metrics: ["16 layers", "3 live feeds", "5,415 objects"],
+    chips: ["Live map", "Fires", "Flights", "GPS interference"],
     previewImage: "./assets/previews/osint-globe-preview.png",
   },
   {
@@ -84,8 +78,7 @@ const cases = [
     dataUrl:
       "https://www.geobrowser.io/space/b5a31f8182b042437ede0f84ee02f104?tabId=b9e3c99a3db144c4976555bf8f0a167a",
     tone: "green",
-    objects: ["Studies", "Outcomes", "Evidence levels", "Safety notes"],
-    metrics: ["189 rows", "243 sources", "122 candidates"],
+    chips: ["Studies", "Outcomes", "Evidence levels", "Safety notes"],
   },
   {
     label: "Disease Data Explorer",
@@ -96,8 +89,7 @@ const cases = [
       "A disease explorer that makes cure status, disease categories, public-health facts, and research context easier to scan.",
     url: "https://disease-data-explorer--deeneyyrn.replit.app/",
     tone: "green",
-    objects: ["Diseases", "Cure status", "Categories", "Research"],
-    metrics: ["Diseases", "Cure status", "Categories"],
+    chips: ["Diseases", "Cure status", "Categories", "Research context"],
   },
   {
     label: "Disease Graph Explorer",
@@ -109,8 +101,7 @@ const cases = [
     url: "https://adamsknowledgegraph.github.io/hetionet/",
     dataUrl: "https://www.geobrowser.io/space/141d3ace705feabc04d50c78bbf7226e",
     tone: "green",
-    objects: ["Diseases", "Genes", "Drugs", "Pathways"],
-    metrics: ["16 disease packets", "1,522 graph objects", "3,297 claims"],
+    chips: ["Diseases", "Genes", "Drugs", "Pathways"],
   },
   {
     label: "Top 200 AI Papers",
@@ -122,8 +113,7 @@ const cases = [
     url: "https://ai.graphatlas.tech/top200ai",
     dataUrl: "https://www.geobrowser.io/space/41e851610e13a19441c4d980f2f2ce6b",
     tone: "yellow",
-    objects: ["Papers", "Authors", "Labs", "Ideas"],
-    metrics: ["Top 200 papers", "Authors", "Research threads"],
+    chips: ["Papers", "Authors", "Labs", "Research lineage"],
     previewImage: "./assets/previews/top200ai-preview.png",
   },
   {
@@ -135,8 +125,7 @@ const cases = [
       "A constellation for exploring standout Geo profiles, rich bios, teams, categories, and community structure.",
     url: "https://atlas-rouge-nine.vercel.app/",
     tone: "pink",
-    objects: ["Profiles", "Teams", "Skills", "Projects"],
-    metrics: ["Profiles", "Teams", "Skills"],
+    chips: ["Profiles", "Teams", "Skills", "Community map"],
   },
   {
     label: "iML1515 Metabolic Network",
@@ -147,8 +136,7 @@ const cases = [
       "A biological network view for E. coli where genes, flux changes, metabolites, pathways, and omics layers can be compared.",
     url: "https://ciaran-lundy.github.io/geo_gem/visualise.html",
     tone: "purple",
-    objects: ["Genes", "Metabolites", "Flux changes", "Pathways"],
-    metrics: ["Flux map", "Omics layers", "Pathways"],
+    chips: ["Genes", "Metabolites", "Pathways", "Flux changes"],
   },
   {
     label: "Educational Inequality Map",
@@ -159,8 +147,7 @@ const cases = [
       "World Bank, HLO, Giga, and geoBoundaries data are staged into an interface for comparing education inequality signals.",
     url: "https://athsrueas.github.io/Open_Data/",
     tone: "mint",
-    objects: ["Countries", "Funding", "Access", "Outcomes"],
-    metrics: ["Countries", "Access", "Funding"],
+    chips: ["Countries", "Funding", "Access", "Outcomes"],
   },
 ];
 
@@ -244,12 +231,8 @@ function createCasePanel(item, index) {
         <h3>${item.title}</h3>
         <p>${item.summary}</p>
       </div>
-      <div class="object-row" aria-label="${item.label} structured objects">
-        <span>Geo-organized data</span>
-        ${item.objects.map((object) => `<span>${object}</span>`).join("")}
-      </div>
-      <div class="metric-row" aria-label="${item.label} signals">
-        ${item.metrics.map((metric) => `<span>${metric}</span>`).join("")}
+      <div class="case-chip-row" aria-label="${item.label} highlights">
+        ${item.chips.map((chip) => `<span>${chip}</span>`).join("")}
       </div>
       <div class="case-links">
         <a class="case-link" href="${item.url}" target="_blank" rel="noreferrer">
