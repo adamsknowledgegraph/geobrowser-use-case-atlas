@@ -975,24 +975,24 @@ body.early-access-open {
 
 .graph-journey {
   position: relative;
-  min-height: 235vh;
-  padding: 28px max(24px, calc((100vw - var(--content-max)) / 2)) 104px;
+  min-height: auto;
+  padding: 56px max(24px, calc((100vw - var(--content-max)) / 2)) 88px;
   background: var(--paper);
 }
 
 .graph-journey-sticky {
-  position: sticky;
-  top: 92px;
+  position: static;
   display: grid;
-  grid-template-columns: minmax(300px, 0.4fr) minmax(0, 1fr);
-  gap: clamp(28px, 3vw, 54px);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
-  min-height: calc(100vh - 118px);
+  min-height: auto;
 }
 
 .graph-journey-copy {
   align-self: start;
-  padding-top: 24px;
+  max-width: none;
+  padding-top: 0;
 }
 
 .graph-journey-copy h3 {
@@ -1004,7 +1004,7 @@ body.early-access-open {
 }
 
 .graph-journey-intro {
-  max-width: 460px;
+  max-width: 920px;
   margin-top: 20px;
   color: var(--muted);
   font-size: clamp(18px, 1.7vw, 24px);
@@ -1012,6 +1012,7 @@ body.early-access-open {
 }
 
 .journey-caption {
+  max-width: min(620px, 100%);
   margin-top: 22px;
   padding: 18px 20px 18px;
   border: 1px solid rgba(21, 21, 21, 0.12);
@@ -1057,19 +1058,20 @@ body.early-access-open {
 
 .graph-journey-steps {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 30px;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .journey-step {
   position: relative;
+  min-height: 214px;
   padding: 18px 18px 16px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.48);
-  opacity: 0.34;
-  transform: translateY(0) scale(0.988);
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 1;
+  transform: none;
   transition:
     opacity 220ms ease,
     transform 220ms ease,
@@ -1087,8 +1089,8 @@ body.early-access-open {
   border-radius: 8px 8px 0 0;
   background: linear-gradient(90deg, var(--pink), var(--purple), var(--yellow));
   content: "";
-  opacity: 0;
-  transform: scaleX(0.18);
+  opacity: 0.58;
+  transform: scaleX(1);
   transform-origin: left center;
   transition:
     opacity 220ms ease,
@@ -1104,8 +1106,8 @@ body.early-access-open {
   border-radius: 999px;
   background: linear-gradient(90deg, var(--pink), var(--purple), var(--yellow));
   content: "";
-  opacity: 0;
-  transform: scaleX(var(--step-progress, 0));
+  opacity: 0.34;
+  transform: scaleX(1);
   transform-origin: left center;
   transition:
     opacity 220ms ease,
@@ -1220,18 +1222,18 @@ body.early-access-open {
 .journey-step strong {
   display: block;
   margin-top: 12px;
-  color: rgba(21, 21, 21, 0.4);
-  font-size: clamp(28px, 2.2vw, 40px);
+  color: var(--ink);
+  font-size: clamp(28px, 2.8vw, 36px);
   font-weight: 880;
   line-height: 0.94;
   transition: color 220ms ease;
 }
 
 .journey-step p {
-  max-width: 28ch;
+  max-width: 20ch;
   margin-top: 10px;
-  color: var(--muted);
-  font-size: 16px;
+  color: var(--ink-soft);
+  font-size: 15px;
   line-height: 1.18;
   transition: color 220ms ease;
 }
@@ -1253,16 +1255,7 @@ body.early-access-open {
 }
 
 .graph-journey-visual {
-  position: relative;
-  margin-top: 18px;
-  min-height: 720px;
-  overflow: hidden;
-  border: 1px solid rgba(21, 21, 21, 0.09);
-  border-radius: 12px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(233, 231, 223, 0.62)),
-    var(--white);
-  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.12);
+  display: none;
 }
 
 .journey-scene {

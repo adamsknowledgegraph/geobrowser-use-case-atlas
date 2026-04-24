@@ -560,205 +560,27 @@ function lerp(start, end, amount) {
 
 function initGraphJourney() {
   const section = document.querySelector(".graph-journey");
-  const scene = document.querySelector("#journey-scene");
-  if (!section || !scene) return;
+  if (!section) return;
 
   const stepNodes = [...section.querySelectorAll(".journey-step")];
   const captionKicker = section.querySelector(".journey-caption-kicker");
   const captionTitle = section.querySelector(".journey-caption-title");
   const captionCopy = section.querySelector(".journey-caption-copy");
-  const nodeElements = new Map(
-    [...scene.querySelectorAll(".journey-node")].map((node) => [node.dataset.node, node]),
-  );
-  const edgeElements = [...scene.querySelectorAll(".journey-edge")];
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const stagePoints = [0, 0.42, 0.7, 1];
-  const stages = [
-    {
-      kicker: "Entities",
-      title: "Entities are the things in the graph.",
-      copy:
-        "People, companies, places, claims, and sources each become structured objects you can keep connecting.",
-    },
-    {
-      kicker: "Relationships",
-      title: "Relationships explain the context.",
-      copy:
-        "The labeled lines show how those entities relate: who leads what, what a claim is about, where it came from, and how it is checked.",
-    },
-    {
-      kicker: "Outputs",
-      title: "The same graph can power useful apps.",
-      copy:
-        "Once the entities and relationships are in place, the same graph can drive profile pages, timelines, and search.",
-    },
-  ];
+
   const staticCaption = {
     kicker: "Entities + relationships",
     title: "Entities are the cards. Relationships are the labeled lines.",
     copy:
       "People, companies, places, claims, and sources can live in one connected graph, then power many different interfaces.",
   };
-  const nodeStates = {
-    topic: { x: 0.18, y: 0.18, appear: 0, full: 0.06, scale: 0.92, blur: 14 },
-    company: { x: 0.46, y: 0.42, appear: 0.05, full: 0.11, scale: 0.92, blur: 16 },
-    person: { x: 0.18, y: 0.64, appear: 0.1, full: 0.16, scale: 0.92, blur: 14 },
-    claim: { x: 0.71, y: 0.49, appear: 0.15, full: 0.21, scale: 0.92, blur: 14 },
-    source: { x: 0.75, y: 0.18, appear: 0.2, full: 0.26, scale: 0.92, blur: 14 },
-    place: { x: 0.77, y: 0.79, appear: 0.25, full: 0.31, scale: 0.92, blur: 14 },
-    editor: { x: 0.12, y: 0.46, appear: 0.44, full: 0.5, scale: 0.88, blur: 16 },
-    verification: { x: 0.46, y: 0.11, appear: 0.5, full: 0.56, scale: 0.88, blur: 16 },
-    "app-profile": { x: 0.88, y: 0.21, appear: 0.72, full: 0.78, scale: 0.9, blur: 14 },
-    "app-timeline": { x: 0.88, y: 0.49, appear: 0.8, full: 0.86, scale: 0.9, blur: 14 },
-    "app-search": { x: 0.86, y: 0.78, appear: 0.88, full: 0.94, scale: 0.9, blur: 14 },
-  };
-
-  let ticking = false;
-  let staticMode = false;
-
-  const getActiveStageIndex = (progress) => {
-    if (progress < stagePoints[1]) return 0;
-    if (progress < stagePoints[2]) return 1;
-    return 2;
-  };
-
-  const getStageProgress = (progress, index) =>
-    clamp(
-      (progress - stagePoints[index]) /
-        Math.max((stagePoints[index + 1] ?? 1) - stagePoints[index], 0.001),
-    );
-
-  const setCaption = (activeIndex) => {
-    const current = staticMode ? staticCaption : stages[activeIndex];
-    if (captionKicker) captionKicker.textContent = current.kicker;
-    if (captionTitle) captionTitle.textContent = current.title;
-    if (captionCopy) captionCopy.textContent = current.copy;
-  };
-
-  const setStepState = (progress, activeIndex) => {
-    if (staticMode) {
-      stepNodes.forEach((step) => {
-        step.classList.remove("is-complete", "is-active");
-        step.style.setProperty("--step-progress", "1");
-      });
-      return;
-    }
-
-    stepNodes.forEach((step, index) => {
-      const isComplete = index < activeIndex;
-      const isActive = index === activeIndex;
-      const localProgress = isComplete ? 1 : isActive ? getStageProgress(progress, index) : 0;
-      step.classList.toggle("is-complete", isComplete);
-      step.classList.toggle("is-active", isActive);
-      step.style.setProperty("--step-progress", String(localProgress));
-    });
-  };
-
-  const edgeProgress = (progress, start, end) =>
-    clamp((progress - start) / Math.max(end - start, 0.001));
-
-  const update = () => {
-    const shouldUseStatic = window.innerWidth <= 1050 || reducedMotion.matches;
-    staticMode = shouldUseStatic;
-
-    if (staticMode) {
-      section.dataset.static = "true";
-    } else {
-      delete section.dataset.static;
-    }
-
-    const progress = staticMode
-      ? 1
-      : clamp(
-          (window.scrollY - section.offsetTop + window.innerHeight * 0.3) /
-            Math.max(section.offsetHeight - window.innerHeight, 1),
-        );
-    const activeStageIndex = getActiveStageIndex(progress);
-
-    const sceneWidth = scene.clientWidth;
-    const sceneHeight = scene.clientHeight;
-    const centers = {};
-
-    Object.entries(nodeStates).forEach(([id, keyframes]) => {
-      const element = nodeElements.get(id);
-      if (!element) return;
-
-      const reveal = staticMode ? 1 : edgeProgress(progress, keyframes.appear, keyframes.full);
-      const width = element.offsetWidth;
-      const height = element.offsetHeight;
-      const x = keyframes.x * sceneWidth;
-      const y = keyframes.y * sceneHeight;
-      const scale = lerp(keyframes.scale ?? 0.92, 1, reveal);
-      const lift = (1 - reveal) * 18;
-      const opacity = clamp(reveal * 1.35);
-      const blur = (1 - reveal) * (keyframes.blur ?? 12);
-
-      element.style.transform = `translate(${x - width / 2}px, ${y - height / 2 + lift}px) scale(${scale})`;
-      element.style.opacity = String(opacity);
-      element.style.filter = `blur(${blur}px)`;
-
-      centers[id] = {
-        x,
-        y,
-        width: width * scale,
-        height: height * scale,
-        opacity,
-      };
-    });
-
-    edgeElements.forEach((edge) => {
-      const from = centers[edge.dataset.from];
-      const to = centers[edge.dataset.to];
-      if (!from || !to) return;
-
-      const reveal = edgeProgress(progress, Number(edge.dataset.appear), Number(edge.dataset.full));
-      const visibility = (staticMode ? 1 : reveal) * Math.min(from.opacity, to.opacity);
-      const labelVisibility = clamp((reveal - 0.35) / 0.45) * clamp(Math.min(from.opacity, to.opacity) * 1.1);
-
-      if (visibility <= 0.01) {
-        edge.style.opacity = "0";
-        edge.style.width = "0px";
-        edge.style.setProperty("--edge-label-opacity", "0");
-        edge.style.transform = "translate(0px, 0px) rotate(0rad) scaleX(0)";
-        return;
-      }
-
-      const angle = Math.atan2(to.y - from.y, to.x - from.x);
-      const fromInset = Math.min(from.width, from.height) * 0.34;
-      const toInset = Math.min(to.width, to.height) * 0.34;
-      const startX = from.x + Math.cos(angle) * fromInset;
-      const startY = from.y + Math.sin(angle) * fromInset;
-      const endX = to.x - Math.cos(angle) * toInset;
-      const endY = to.y - Math.sin(angle) * toInset;
-      const distance = Math.hypot(endX - startX, endY - startY);
-
-      edge.style.opacity = String(visibility);
-      edge.style.width = `${distance}px`;
-      edge.style.setProperty("--edge-label-opacity", String(labelVisibility));
-      edge.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}rad) scaleX(${reveal})`;
-    });
-
-    setCaption(activeStageIndex);
-    setStepState(progress, activeStageIndex);
-    ticking = false;
-  };
-
-  const requestUpdate = () => {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(update);
-  };
-
-  window.addEventListener("scroll", requestUpdate, { passive: true });
-  window.addEventListener("resize", requestUpdate);
-
-  if (typeof reducedMotion.addEventListener === "function") {
-    reducedMotion.addEventListener("change", requestUpdate);
-  } else if (typeof reducedMotion.addListener === "function") {
-    reducedMotion.addListener(requestUpdate);
-  }
-
-  requestUpdate();
+  section.dataset.static = "true";
+  if (captionKicker) captionKicker.textContent = staticCaption.kicker;
+  if (captionTitle) captionTitle.textContent = staticCaption.title;
+  if (captionCopy) captionCopy.textContent = staticCaption.copy;
+  stepNodes.forEach((step) => {
+    step.classList.remove("is-complete", "is-active");
+    step.style.setProperty("--step-progress", "1");
+  });
 }
 
 let observer;
