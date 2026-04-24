@@ -734,47 +734,9 @@ h3 {
   line-height: 1.16;
 }
 
-.journey-status {
-  display: grid;
-  gap: 6px;
-  max-width: 420px;
-  margin-top: 24px;
-  padding: 18px 18px 16px;
-  border: 1px solid rgba(21, 21, 21, 0.09);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.68);
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.06);
-  transition:
-    border-color 220ms ease,
-    background 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
-}
-
-.journey-status-kicker {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 850;
-  letter-spacing: 0.12em;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.journey-status strong {
-  color: var(--ink);
-  font-size: clamp(24px, 2.4vw, 34px);
-  font-weight: 880;
-  line-height: 0.94;
-}
-
-.journey-status p {
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.2;
-}
-
 .graph-journey-steps {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-top: 30px;
 }
@@ -876,6 +838,14 @@ h3 {
 .graph-journey[data-static="true"] .journey-step::after {
   opacity: 0.34;
   transform: scaleX(1);
+}
+
+.graph-journey[data-static="true"] .journey-step strong {
+  color: var(--ink);
+}
+
+.graph-journey[data-static="true"] .journey-step p {
+  color: var(--ink-soft);
 }
 
 .journey-step span {
@@ -2327,10 +2297,6 @@ h3 {
     padding-top: 0;
   }
 
-  .journey-status {
-    max-width: none;
-  }
-
   .graph-journey-steps {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2506,18 +2472,32 @@ h3 {
     font-size: 18px;
   }
 
-  .journey-status {
-    margin-top: 20px;
+  .graph-journey-steps {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(220px, 1fr);
+    grid-template-columns: none;
+    margin-top: 24px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: 6px;
+    scrollbar-width: none;
+  }
+
+  .graph-journey-steps::-webkit-scrollbar {
+    display: none;
+  }
+
+  .journey-step {
+    min-height: 174px;
     padding: 16px 16px 14px;
   }
 
-  .journey-status strong {
-    font-size: clamp(22px, 7vw, 28px);
+  .journey-step strong {
+    font-size: clamp(24px, 7vw, 32px);
   }
 
-  .graph-journey-steps {
-    grid-template-columns: 1fr;
-    margin-top: 24px;
+  .journey-step p {
+    font-size: 15px;
   }
 
   .graph-journey-visual,

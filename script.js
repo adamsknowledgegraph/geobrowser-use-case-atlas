@@ -452,8 +452,6 @@ function initGraphJourney() {
   if (!section || !scene) return;
 
   const stepNodes = [...section.querySelectorAll(".journey-step")];
-  const statusTitle = section.querySelector(".journey-status-title");
-  const statusCopy = section.querySelector(".journey-status-copy");
   const nodeElements = new Map(
     [...scene.querySelectorAll(".journey-node")].map((node) => [node.dataset.node, node]),
   );
@@ -461,23 +459,6 @@ function initGraphJourney() {
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const framePoints = [0, 0.32, 0.66, 1];
   const stagePoints = [0, 0.34, 0.68, 1];
-  const stages = [
-    {
-      slug: "trace",
-      title: "Trace",
-      copy: "Links between people, claims, sources, and places.",
-    },
-    {
-      slug: "participate",
-      title: "Participate",
-      copy: "Community edits and verification make the graph stronger.",
-    },
-    {
-      slug: "build",
-      title: "Build",
-      copy: "The same graph now powers profiles, timelines, and search.",
-    },
-  ];
   const nodeStates = {
     topic: [
       { x: 0.11, y: 0.2, opacity: 0.44, scale: 0.9, rotate: -8 },
@@ -564,14 +545,10 @@ function initGraphJourney() {
 
   const setStepState = (progress, activeIndex) => {
     if (staticMode) {
-      stepNodes.forEach((step, index) => {
-        step.classList.add("is-complete");
-        step.classList.toggle("is-active", index === 2);
+      stepNodes.forEach((step) => {
+        step.classList.remove("is-complete", "is-active");
         step.style.setProperty("--step-progress", "1");
       });
-      section.dataset.stage = stages[2].slug;
-      if (statusTitle) statusTitle.textContent = stages[2].title;
-      if (statusCopy) statusCopy.textContent = stages[2].copy;
       return;
     }
 
@@ -583,10 +560,6 @@ function initGraphJourney() {
       step.classList.toggle("is-active", isActive);
       step.style.setProperty("--step-progress", String(localProgress));
     });
-
-    section.dataset.stage = stages[activeIndex].slug;
-    if (statusTitle) statusTitle.textContent = stages[activeIndex].title;
-    if (statusCopy) statusCopy.textContent = stages[activeIndex].copy;
   };
 
   const edgeProgress = (progress, start, end) => clamp((progress - start) / Math.max(end - start, 0.001));
