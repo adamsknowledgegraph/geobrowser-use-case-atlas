@@ -173,6 +173,13 @@
               Scroll to see people, companies, sources, claims, places, and topics connect
               into one shared graph that can be checked, improved, and turned into useful apps.
             </p>
+            <div class="journey-status" aria-live="polite">
+              <span class="journey-status-kicker">Now showing</span>
+              <strong class="journey-status-title">Trace</strong>
+              <p class="journey-status-copy">
+                Links between people, claims, sources, and places.
+              </p>
+            </div>
             <div class="graph-journey-steps" aria-label="How the graph becomes useful">
               <article class="journey-step is-active" data-step="0">
                 <span>01</span>
@@ -195,37 +202,37 @@
           <div class="graph-journey-visual">
             <div class="journey-scene" id="journey-scene" aria-hidden="true">
               <div class="journey-edge-layer">
-                <div class="journey-edge" data-from="topic" data-to="company" data-appear="0.06" data-full="0.24">
+                <div class="journey-edge" data-stage="0" data-from="topic" data-to="company" data-appear="0.06" data-full="0.24">
                   <span>Category</span>
                 </div>
-                <div class="journey-edge" data-from="person" data-to="company" data-appear="0.08" data-full="0.28">
+                <div class="journey-edge" data-stage="0" data-from="person" data-to="company" data-appear="0.08" data-full="0.28">
                   <span>CEO</span>
                 </div>
-                <div class="journey-edge" data-from="claim" data-to="company" data-appear="0.12" data-full="0.3">
+                <div class="journey-edge" data-stage="0" data-from="claim" data-to="company" data-appear="0.12" data-full="0.3">
                   <span>About</span>
                 </div>
-                <div class="journey-edge" data-from="source" data-to="claim" data-appear="0.15" data-full="0.32">
+                <div class="journey-edge" data-stage="0" data-from="source" data-to="claim" data-appear="0.15" data-full="0.32">
                   <span>Source</span>
                 </div>
-                <div class="journey-edge" data-from="place" data-to="company" data-appear="0.17" data-full="0.34">
+                <div class="journey-edge" data-stage="0" data-from="place" data-to="company" data-appear="0.17" data-full="0.34">
                   <span>Based in</span>
                 </div>
-                <div class="journey-edge" data-from="editor" data-to="claim" data-appear="0.4" data-full="0.54">
+                <div class="journey-edge" data-stage="1" data-from="editor" data-to="claim" data-appear="0.4" data-full="0.54">
                   <span>Adds note</span>
                 </div>
-                <div class="journey-edge" data-from="editor" data-to="source" data-appear="0.44" data-full="0.58">
+                <div class="journey-edge" data-stage="1" data-from="editor" data-to="source" data-appear="0.44" data-full="0.58">
                   <span>Links source</span>
                 </div>
-                <div class="journey-edge" data-from="verification" data-to="claim" data-appear="0.46" data-full="0.6">
+                <div class="journey-edge" data-stage="1" data-from="verification" data-to="claim" data-appear="0.46" data-full="0.6">
                   <span>Verified</span>
                 </div>
-                <div class="journey-edge" data-from="company" data-to="app-profile" data-appear="0.72" data-full="0.9">
+                <div class="journey-edge" data-stage="2" data-from="company" data-to="app-profile" data-appear="0.72" data-full="0.9">
                   <span>Profile</span>
                 </div>
-                <div class="journey-edge" data-from="claim" data-to="app-timeline" data-appear="0.74" data-full="0.92">
+                <div class="journey-edge" data-stage="2" data-from="claim" data-to="app-timeline" data-appear="0.74" data-full="0.92">
                   <span>Timeline</span>
                 </div>
-                <div class="journey-edge" data-from="topic" data-to="app-search" data-appear="0.76" data-full="0.94">
+                <div class="journey-edge" data-stage="2" data-from="topic" data-to="app-search" data-appear="0.76" data-full="0.94">
                   <span>Search</span>
                 </div>
               </div>

@@ -481,92 +481,141 @@ function initGraphJourney() {
   if (!section || !scene) return;
 
   const stepNodes = [...section.querySelectorAll(".journey-step")];
+  const statusTitle = section.querySelector(".journey-status-title");
+  const statusCopy = section.querySelector(".journey-status-copy");
   const nodeElements = new Map(
     [...scene.querySelectorAll(".journey-node")].map((node) => [node.dataset.node, node]),
   );
   const edgeElements = [...scene.querySelectorAll(".journey-edge")];
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const framePoints = [0, 0.28, 0.62, 1];
+  const framePoints = [0, 0.32, 0.66, 1];
+  const stagePoints = [0, 0.34, 0.68, 1];
+  const stages = [
+    {
+      slug: "trace",
+      title: "Trace",
+      copy: "Links between people, claims, sources, and places.",
+    },
+    {
+      slug: "participate",
+      title: "Participate",
+      copy: "Community edits and verification make the graph stronger.",
+    },
+    {
+      slug: "build",
+      title: "Build",
+      copy: "The same graph now powers profiles, timelines, and search.",
+    },
+  ];
   const nodeStates = {
     topic: [
-      { x: 0.16, y: 0.2, opacity: 0.72, scale: 0.92, rotate: -6 },
-      { x: 0.22, y: 0.22, opacity: 1, scale: 1, rotate: -1 },
-      { x: 0.2, y: 0.2, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.18, y: 0.16, opacity: 1, scale: 1, rotate: -2 },
+      { x: 0.11, y: 0.2, opacity: 0.44, scale: 0.9, rotate: -8 },
+      { x: 0.2, y: 0.22, opacity: 1, scale: 1, rotate: -1 },
+      { x: 0.18, y: 0.21, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.17, y: 0.18, opacity: 0.88, scale: 0.97, rotate: -1 },
     ],
     company: [
-      { x: 0.5, y: 0.42, opacity: 0.78, scale: 0.94, rotate: -2 },
-      { x: 0.5, y: 0.42, opacity: 1, scale: 1.04, rotate: 0 },
-      { x: 0.49, y: 0.43, opacity: 1, scale: 1.04, rotate: 0 },
-      { x: 0.39, y: 0.42, opacity: 1, scale: 1.04, rotate: 0 },
+      { x: 0.48, y: 0.44, opacity: 0.56, scale: 0.92, rotate: -2 },
+      { x: 0.5, y: 0.44, opacity: 1, scale: 1.04, rotate: 0 },
+      { x: 0.48, y: 0.45, opacity: 1, scale: 1.04, rotate: 0 },
+      { x: 0.38, y: 0.43, opacity: 1, scale: 1.02, rotate: 0 },
     ],
     person: [
-      { x: 0.16, y: 0.72, opacity: 0.72, scale: 0.92, rotate: 5 },
-      { x: 0.24, y: 0.68, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.22, y: 0.66, opacity: 1, scale: 1, rotate: -1 },
-      { x: 0.18, y: 0.6, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.12, y: 0.74, opacity: 0.42, scale: 0.9, rotate: 6 },
+      { x: 0.22, y: 0.68, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.21, y: 0.67, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.17, y: 0.64, opacity: 0.62, scale: 0.95, rotate: 0 },
     ],
     source: [
-      { x: 0.84, y: 0.18, opacity: 0.68, scale: 0.9, rotate: -5 },
-      { x: 0.77, y: 0.21, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.75, y: 0.2, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.26, y: 0.18, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.84, y: 0.16, opacity: 0.38, scale: 0.88, rotate: -6 },
+      { x: 0.75, y: 0.21, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.73, y: 0.2, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.3, y: 0.17, opacity: 0.76, scale: 0.95, rotate: 0 },
     ],
     claim: [
-      { x: 0.84, y: 0.5, opacity: 0.68, scale: 0.9, rotate: 4 },
-      { x: 0.76, y: 0.48, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.73, y: 0.45, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.24, y: 0.44, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.84, y: 0.48, opacity: 0.4, scale: 0.88, rotate: 4 },
+      { x: 0.72, y: 0.49, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.7, y: 0.46, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.57, y: 0.42, opacity: 0.96, scale: 0.98, rotate: 0 },
     ],
     place: [
-      { x: 0.85, y: 0.82, opacity: 0.66, scale: 0.9, rotate: -4 },
-      { x: 0.8, y: 0.77, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.8, y: 0.74, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.45, y: 0.77, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.86, y: 0.82, opacity: 0.36, scale: 0.88, rotate: -4 },
+      { x: 0.73, y: 0.76, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.71, y: 0.75, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.42, y: 0.79, opacity: 0.7, scale: 0.95, rotate: 0 },
     ],
     editor: [
-      { x: 0.15, y: 0.5, opacity: 0, scale: 0.84, rotate: -8 },
-      { x: 0.16, y: 0.5, opacity: 0, scale: 0.88, rotate: -6 },
-      { x: 0.17, y: 0.48, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.16, y: 0.5, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.08, y: 0.52, opacity: 0, scale: 0.78, rotate: -10 },
+      { x: 0.08, y: 0.52, opacity: 0, scale: 0.82, rotate: -8 },
+      { x: 0.14, y: 0.49, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.12, y: 0.48, opacity: 0.16, scale: 0.88, rotate: -6 },
     ],
     verification: [
-      { x: 0.46, y: 0.14, opacity: 0, scale: 0.84, rotate: -4 },
-      { x: 0.46, y: 0.14, opacity: 0, scale: 0.88, rotate: -2 },
-      { x: 0.44, y: 0.14, opacity: 1, scale: 1, rotate: 0 },
-      { x: 0.43, y: 0.14, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.48, y: 0.08, opacity: 0, scale: 0.78, rotate: -4 },
+      { x: 0.48, y: 0.08, opacity: 0, scale: 0.82, rotate: -2 },
+      { x: 0.46, y: 0.14, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.42, y: 0.11, opacity: 0.15, scale: 0.88, rotate: 0 },
     ],
     "app-profile": [
-      { x: 0.87, y: 0.18, opacity: 0, scale: 0.82, rotate: 3 },
-      { x: 0.87, y: 0.18, opacity: 0, scale: 0.82, rotate: 2 },
-      { x: 0.84, y: 0.18, opacity: 0, scale: 0.84, rotate: 2 },
-      { x: 0.82, y: 0.2, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.9, y: 0.2, opacity: 0, scale: 0.82, rotate: 3 },
+      { x: 0.9, y: 0.2, opacity: 0, scale: 0.82, rotate: 2 },
+      { x: 0.88, y: 0.2, opacity: 0.08, scale: 0.84, rotate: 2 },
+      { x: 0.83, y: 0.2, opacity: 1, scale: 1, rotate: 0 },
     ],
     "app-timeline": [
-      { x: 0.87, y: 0.42, opacity: 0, scale: 0.82, rotate: 2 },
-      { x: 0.87, y: 0.42, opacity: 0, scale: 0.82, rotate: 2 },
-      { x: 0.84, y: 0.42, opacity: 0, scale: 0.84, rotate: 1 },
-      { x: 0.82, y: 0.44, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.9, y: 0.46, opacity: 0, scale: 0.82, rotate: 2 },
+      { x: 0.9, y: 0.46, opacity: 0, scale: 0.82, rotate: 2 },
+      { x: 0.88, y: 0.46, opacity: 0.08, scale: 0.84, rotate: 1 },
+      { x: 0.83, y: 0.46, opacity: 1, scale: 1, rotate: 0 },
     ],
     "app-search": [
-      { x: 0.87, y: 0.66, opacity: 0, scale: 0.82, rotate: 1 },
-      { x: 0.87, y: 0.66, opacity: 0, scale: 0.82, rotate: 1 },
-      { x: 0.84, y: 0.66, opacity: 0, scale: 0.84, rotate: 1 },
-      { x: 0.82, y: 0.68, opacity: 1, scale: 1, rotate: 0 },
+      { x: 0.9, y: 0.71, opacity: 0, scale: 0.82, rotate: 1 },
+      { x: 0.9, y: 0.71, opacity: 0, scale: 0.82, rotate: 1 },
+      { x: 0.88, y: 0.71, opacity: 0.08, scale: 0.84, rotate: 1 },
+      { x: 0.83, y: 0.71, opacity: 1, scale: 1, rotate: 0 },
     ],
   };
 
   let ticking = false;
   let staticMode = false;
 
-  const setStepState = (progress) => {
+  const getActiveStageIndex = (progress) => {
+    if (progress < stagePoints[1]) return 0;
+    if (progress < stagePoints[2]) return 1;
+    return 2;
+  };
+
+  const getStageProgress = (progress, index) =>
+    clamp(
+      (progress - stagePoints[index]) /
+        Math.max((stagePoints[index + 1] ?? 1) - stagePoints[index], 0.001),
+    );
+
+  const setStepState = (progress, activeIndex) => {
     if (staticMode) {
-      stepNodes.forEach((step) => step.classList.add("is-active"));
+      stepNodes.forEach((step, index) => {
+        step.classList.add("is-complete");
+        step.classList.toggle("is-active", index === 2);
+        step.style.setProperty("--step-progress", "1");
+      });
+      section.dataset.stage = stages[2].slug;
+      if (statusTitle) statusTitle.textContent = stages[2].title;
+      if (statusCopy) statusCopy.textContent = stages[2].copy;
       return;
     }
 
-    const activeIndex = progress < 0.34 ? 0 : progress < 0.68 ? 1 : 2;
-    stepNodes.forEach((step, index) => step.classList.toggle("is-active", index === activeIndex));
+    stepNodes.forEach((step, index) => {
+      const isComplete = index < activeIndex;
+      const isActive = index === activeIndex;
+      const localProgress = isComplete ? 1 : isActive ? getStageProgress(progress, index) : 0;
+      step.classList.toggle("is-complete", isComplete);
+      step.classList.toggle("is-active", isActive);
+      step.style.setProperty("--step-progress", String(localProgress));
+    });
+
+    section.dataset.stage = stages[activeIndex].slug;
+    if (statusTitle) statusTitle.textContent = stages[activeIndex].title;
+    if (statusCopy) statusCopy.textContent = stages[activeIndex].copy;
   };
 
   const edgeProgress = (progress, start, end) => clamp((progress - start) / Math.max(end - start, 0.001));
@@ -587,6 +636,7 @@ function initGraphJourney() {
           (window.scrollY - section.offsetTop + window.innerHeight * 0.16) /
             Math.max(section.offsetHeight - window.innerHeight, 1),
         );
+    const activeStageIndex = getActiveStageIndex(progress);
 
     const sceneWidth = scene.clientWidth;
     const sceneHeight = scene.clientHeight;
@@ -620,11 +670,27 @@ function initGraphJourney() {
       if (!from || !to) return;
 
       const reveal = edgeProgress(progress, Number(edge.dataset.appear), Number(edge.dataset.full));
-      const visibility = reveal * Math.min(from.opacity, to.opacity);
+      const edgeStage = Number(edge.dataset.stage || 0);
+      let visibility = reveal * Math.min(from.opacity, to.opacity);
+      let labelVisibility = visibility;
+
+      if (!staticMode) {
+        if (edgeStage < activeStageIndex) {
+          visibility *= activeStageIndex === 2 ? 0.18 : 0.58;
+          labelVisibility = activeStageIndex === 2 ? 0 : visibility * 0.24;
+        } else if (edgeStage > activeStageIndex) {
+          visibility *= 0.03;
+          labelVisibility = 0;
+        } else {
+          visibility *= 1.08;
+          labelVisibility = clamp(visibility * 1.18);
+        }
+      }
 
       if (visibility <= 0.01) {
         edge.style.opacity = "0";
         edge.style.width = "0px";
+        edge.style.setProperty("--edge-label-opacity", "0");
         edge.style.transform = "translate(0px, 0px) rotate(0rad) scaleX(0)";
         return;
       }
@@ -640,10 +706,11 @@ function initGraphJourney() {
 
       edge.style.opacity = String(visibility);
       edge.style.width = `${distance}px`;
+      edge.style.setProperty("--edge-label-opacity", String(labelVisibility));
       edge.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}rad) scaleX(${reveal})`;
     });
 
-    setStepState(progress);
+    setStepState(progress, activeStageIndex);
     ticking = false;
   };
 
