@@ -1151,9 +1151,34 @@ body.early-access-open {
   background: rgba(255, 255, 255, 0.9);
 }
 
+.graph-journey[data-static="true"] {
+  min-height: auto;
+  padding-top: 56px;
+  padding-bottom: 88px;
+}
+
+.graph-journey[data-static="true"] .graph-journey-sticky {
+  position: static;
+  grid-template-columns: minmax(0, 1fr);
+  min-height: auto;
+}
+
+.graph-journey[data-static="true"] .graph-journey-copy {
+  max-width: none;
+  padding-top: 0;
+}
+
 .graph-journey[data-static="true"] .graph-journey-steps {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 24px;
+}
+
+.graph-journey[data-static="true"] .journey-caption {
+  max-width: min(520px, 100%);
+}
+
+.graph-journey[data-static="true"] .graph-journey-visual {
+  display: none;
 }
 
 .graph-journey[data-static="true"] .journey-step::before {
