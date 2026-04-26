@@ -561,12 +561,40 @@ function lerp(start, end, amount) {
 
 function initGraphJourney() {
   const section = document.querySelector(".graph-journey");
-  if (!section) return;
+  const scene = document.querySelector("#journey-scene");
+  if (!section || !scene) return;
 
   const stepNodes = [...section.querySelectorAll(".journey-step")];
   const captionKicker = section.querySelector(".journey-caption-kicker");
   const captionTitle = section.querySelector(".journey-caption-title");
   const captionCopy = section.querySelector(".journey-caption-copy");
+  const nodeElements = new Map(
+    [...scene.querySelectorAll(".journey-node")].map((node) => [node.dataset.node, node]),
+  );
+  const edgeElements = [...scene.querySelectorAll(".journey-edge")];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const stagePoints = [0, 0.32, 0.66, 1];
+  const stages = [
+    {
+      kicker: "Entities",
+      title: "Entities are the things in the graph.",
+      copy:
+        "People, companies, places, claims, sources, and topics become reusable objects instead of getting trapped in separate pages.",
+    },
+    {
+      kicker: "Relationships",
+      title: "Relationships add context and verification.",
+      copy:
+        "The labeled links show who said what, what it refers to, where it came from, and how it can be checked.",
+    },
+    {
+      kicker: "Outputs",
+      title: "The same graph can power useful interfaces.",
+      copy:
+        "Once the graph exists, the same structure can become profile pages, timelines, search, dossiers, and apps.",
+    },
+  ];
 
   const staticCaption = {
     kicker: "Entities + relationships",
@@ -574,14 +602,157 @@ function initGraphJourney() {
     copy:
       "People, companies, places, claims, and sources can live in one connected graph, then power many different interfaces.",
   };
-  section.dataset.static = "true";
-  if (captionKicker) captionKicker.textContent = staticCaption.kicker;
-  if (captionTitle) captionTitle.textContent = staticCaption.title;
-  if (captionCopy) captionCopy.textContent = staticCaption.copy;
-  stepNodes.forEach((step) => {
-    step.classList.remove("is-complete", "is-active");
-    step.style.setProperty("--step-progress", "1");
-  });
+  const nodeStates = {
+    topic: { x: 0.18, y: 0.19, appear: 0.02, full: 0.08, scale: 0.92, blur: 14 },
+    company: { x: 0.46, y: 0.44, appear: 0.08, full: 0.14, scale: 0.92, blur: 16 },
+    person: { x: 0.18, y: 0.69, appear: 0.14, full: 0.2, scale: 0.92, blur: 14 },
+    source: { x: 0.76, y: 0.18, appear: 0.2, full: 0.26, scale: 0.92, blur: 14 },
+    claim: { x: 0.74, y: 0.5, appear: 0.26, full: 0.32, scale: 0.92, blur: 14 },
+    place: { x: 0.79, y: 0.8, appear: 0.32, full: 0.38, scale: 0.92, blur: 14 },
+    verification: { x: 0.46, y: 0.11, appear: 0.5, full: 0.56, scale: 0.88, blur: 16 },
+    editor: { x: 0.11, y: 0.48, appear: 0.56, full: 0.62, scale: 0.88, blur: 16 },
+    "app-profile": { x: 0.9, y: 0.22, appear: 0.76, full: 0.82, scale: 0.9, blur: 14 },
+    "app-timeline": { x: 0.9, y: 0.5, appear: 0.84, full: 0.9, scale: 0.9, blur: 14 },
+    "app-search": { x: 0.88, y: 0.8, appear: 0.9, full: 0.96, scale: 0.9, blur: 14 },
+  };
+
+  let ticking = false;
+  let staticMode = false;
+
+  const setCaption = (activeIndex) => {
+    const current = staticMode ? staticCaption : stages[activeIndex];
+    if (captionKicker) captionKicker.textContent = current.kicker;
+    if (captionTitle) captionTitle.textContent = current.title;
+    if (captionCopy) captionCopy.textContent = current.copy;
+  };
+
+  const setStepState = (activeIndex) => {
+    stepNodes.forEach((step, index) => {
+      if (staticMode) {
+        step.classList.remove("is-complete", "is-active");
+        step.style.setProperty("--step-progress", "1");
+        return;
+      }
+      const isComplete = index < activeIndex;
+      const isActive = index === activeIndex;
+      step.classList.toggle("is-complete", isComplete);
+      step.classList.toggle("is-active", isActive);
+      step.style.setProperty("--step-progress", isComplete || isActive ? "1" : "0");
+    });
+  };
+
+  const edgeProgress = (progress, start, end) =>
+    clamp((progress - start) / Math.max(end - start, 0.001));
+
+  const getActiveStageIndex = (progress) => {
+    if (progress < stagePoints[1]) return 0;
+    if (progress < stagePoints[2]) return 1;
+    return 2;
+  };
+
+  const update = () => {
+    staticMode = window.innerWidth <= 1050 || reducedMotion.matches;
+    if (staticMode) {
+      section.dataset.static = "true";
+    } else {
+      delete section.dataset.static;
+    }
+
+    const progress = staticMode
+      ? 1
+      : clamp(
+          (window.scrollY - section.offsetTop + window.innerHeight * 0.45) /
+            Math.max(section.offsetHeight - window.innerHeight, 1),
+        );
+
+    const activeStageIndex = getActiveStageIndex(progress);
+    const sceneWidth = scene.clientWidth;
+    const sceneHeight = scene.clientHeight;
+    const centers = {};
+
+    Object.entries(nodeStates).forEach(([id, keyframes]) => {
+      const element = nodeElements.get(id);
+      if (!element) return;
+
+      const reveal = staticMode ? 1 : edgeProgress(progress, keyframes.appear, keyframes.full);
+      const width = element.offsetWidth;
+      const height = element.offsetHeight;
+      const x = keyframes.x * sceneWidth;
+      const y = keyframes.y * sceneHeight;
+      const scale = lerp(keyframes.scale ?? 0.92, 1, reveal);
+      const lift = (1 - reveal) * 20;
+      const opacity = clamp(reveal * 1.35);
+      const blur = (1 - reveal) * (keyframes.blur ?? 12);
+
+      element.style.transform = `translate(${x - width / 2}px, ${y - height / 2 + lift}px) scale(${scale})`;
+      element.style.opacity = String(opacity);
+      element.style.filter = `blur(${blur}px)`;
+
+      centers[id] = {
+        x,
+        y,
+        width: width * scale,
+        height: height * scale,
+        opacity,
+      };
+    });
+
+    edgeElements.forEach((edge) => {
+      const from = centers[edge.dataset.from];
+      const to = centers[edge.dataset.to];
+      if (!from || !to) return;
+
+      const reveal = staticMode
+        ? 1
+        : edgeProgress(progress, Number(edge.dataset.appear), Number(edge.dataset.full));
+      const visibility = reveal * Math.min(from.opacity, to.opacity);
+      const labelVisibility =
+        clamp((reveal - 0.32) / 0.42) * clamp(Math.min(from.opacity, to.opacity) * 1.1);
+
+      if (visibility <= 0.01) {
+        edge.style.opacity = "0";
+        edge.style.width = "0px";
+        edge.style.setProperty("--edge-label-opacity", "0");
+        edge.style.transform = "translate(0px, 0px) rotate(0rad) scaleX(0)";
+        return;
+      }
+
+      const angle = Math.atan2(to.y - from.y, to.x - from.x);
+      const fromInset = Math.min(from.width, from.height) * 0.34;
+      const toInset = Math.min(to.width, to.height) * 0.34;
+      const startX = from.x + Math.cos(angle) * fromInset;
+      const startY = from.y + Math.sin(angle) * fromInset;
+      const endX = to.x - Math.cos(angle) * toInset;
+      const endY = to.y - Math.sin(angle) * toInset;
+      const distance = Math.hypot(endX - startX, endY - startY);
+
+      edge.style.opacity = String(visibility);
+      edge.style.width = `${distance}px`;
+      edge.style.setProperty("--edge-label-opacity", String(labelVisibility));
+      edge.style.transform = `translate(${startX}px, ${startY}px) rotate(${angle}rad) scaleX(${reveal})`;
+    });
+
+    setCaption(activeStageIndex);
+    setStepState(activeStageIndex);
+    ticking = false;
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+
+  if (typeof reducedMotion.addEventListener === "function") {
+    reducedMotion.addEventListener("change", requestUpdate);
+  } else if (typeof reducedMotion.addListener === "function") {
+    reducedMotion.addListener(requestUpdate);
+  }
+
+  requestUpdate();
 }
 
 let observer;

@@ -975,52 +975,44 @@ body.early-access-open {
 
 .graph-journey {
   position: relative;
-  min-height: auto;
-  padding: 56px max(24px, calc((100vw - var(--content-max)) / 2)) 88px;
+  min-height: 250vh;
+  padding: 24px max(24px, calc((100vw - var(--content-max)) / 2)) 96px;
   background: var(--paper);
 }
 
 .graph-journey-sticky {
-  position: static;
+  position: sticky;
+  top: 94px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 28px;
+  grid-template-columns: minmax(320px, 0.38fr) minmax(0, 1fr);
+  gap: clamp(28px, 3vw, 54px);
   align-items: start;
-  min-height: auto;
+  min-height: calc(100vh - 118px);
 }
 
 .graph-journey-copy {
   align-self: start;
-  max-width: none;
-  padding-top: 0;
+  padding-top: 18px;
 }
 
-.graph-journey-copy h3 {
-  margin-top: 18px;
-  font-size: clamp(42px, 5vw, 80px);
-  font-weight: 880;
-  line-height: 0.92;
-  text-wrap: balance;
-}
-
-.graph-journey-intro {
-  max-width: 920px;
-  margin-top: 20px;
-  color: var(--muted);
-  font-size: clamp(18px, 1.7vw, 24px);
-  line-height: 1.16;
+.journey-eyebrow {
+  color: #718a00;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .journey-caption {
-  max-width: min(620px, 100%);
-  margin-top: 22px;
+  margin-top: 16px;
   padding: 18px 20px 18px;
   border: 1px solid rgba(21, 21, 21, 0.12);
-  border-radius: 12px;
+  border-radius: 16px;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.7)),
     rgba(255, 255, 255, 0.86);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.06);
 }
 
 .journey-caption-kicker {
@@ -1042,36 +1034,36 @@ body.early-access-open {
   display: block;
   margin-top: 14px;
   color: var(--ink);
-  font-size: clamp(24px, 2.6vw, 34px);
+  font-size: clamp(26px, 2.2vw, 34px);
   font-weight: 850;
   line-height: 0.98;
   text-wrap: balance;
 }
 
 .journey-caption-copy {
-  max-width: 34ch;
+  max-width: 30ch;
   margin-top: 10px;
   color: var(--ink-soft);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.18;
 }
 
 .graph-journey-steps {
   display: grid;
-  grid-template-columns: repeat(3, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 24px;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .journey-step {
   position: relative;
-  min-height: 214px;
-  padding: 18px 18px 16px;
+  min-height: 0;
+  padding: 16px 16px 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  opacity: 1;
-  transform: none;
+  background: rgba(255, 255, 255, 0.58);
+  opacity: 0.48;
+  transform: translateY(0) scale(0.99);
   transition:
     opacity 220ms ease,
     transform 220ms ease,
@@ -1089,8 +1081,8 @@ body.early-access-open {
   border-radius: 8px 8px 0 0;
   background: linear-gradient(90deg, var(--pink), var(--purple), var(--yellow));
   content: "";
-  opacity: 0.58;
-  transform: scaleX(1);
+  opacity: 0.18;
+  transform: scaleX(0.24);
   transform-origin: left center;
   transition:
     opacity 220ms ease,
@@ -1106,18 +1098,56 @@ body.early-access-open {
   border-radius: 999px;
   background: linear-gradient(90deg, var(--pink), var(--purple), var(--yellow));
   content: "";
-  opacity: 0.34;
-  transform: scaleX(1);
+  opacity: 0.12;
+  transform: scaleX(var(--step-progress, 0));
   transform-origin: left center;
   transition:
     opacity 220ms ease,
     transform 220ms ease;
 }
 
+.journey-step span {
+  display: block;
+  color: var(--muted);
+  font-family: "Calibre Semibold", Geist, sans-serif;
+  font-size: 15px;
+}
+
+.journey-step strong {
+  display: block;
+  margin-top: 12px;
+  color: rgba(21, 21, 21, 0.42);
+  font-size: clamp(24px, 1.8vw, 30px);
+  font-weight: 880;
+  line-height: 0.96;
+  transition: color 220ms ease;
+}
+
+.journey-step p {
+  max-width: none;
+  margin-top: 10px;
+  color: rgba(21, 21, 21, 0.52);
+  font-size: 14px;
+  line-height: 1.18;
+  transition: color 220ms ease;
+}
+
+.graph-journey-visual {
+  position: relative;
+  min-height: 720px;
+  overflow: hidden;
+  border: 1px solid rgba(21, 21, 21, 0.09);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(233, 231, 223, 0.62)),
+    var(--white);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.12);
+}
+
 .journey-step.is-complete {
   border-color: rgba(21, 21, 21, 0.16);
-  background: rgba(255, 255, 255, 0.72);
-  opacity: 0.82;
+  background: rgba(255, 255, 255, 0.74);
+  opacity: 0.84;
   transform: translateY(0);
 }
 
@@ -1130,11 +1160,19 @@ body.early-access-open {
   opacity: 0.34;
 }
 
+.journey-step.is-complete strong {
+  color: rgba(21, 21, 21, 0.78);
+}
+
+.journey-step.is-complete p {
+  color: rgba(21, 21, 21, 0.62);
+}
+
 .journey-step.is-active {
   border-color: var(--line-strong);
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
   opacity: 1;
-  transform: translateY(-3px) scale(1);
+  transform: translateY(-4px) scale(1);
   box-shadow: 0 20px 44px rgba(0, 0, 0, 0.09);
 }
 
@@ -1144,43 +1182,44 @@ body.early-access-open {
 }
 
 .journey-step.is-active::after {
-  opacity: 0.8;
+  opacity: 0.84;
 }
 
-.graph-journey[data-static="true"] .journey-step {
-  opacity: 1;
-  transform: none;
-  background: rgba(255, 255, 255, 0.9);
+.journey-step.is-active strong {
+  color: var(--ink);
+}
+
+.journey-step.is-active p {
+  color: var(--ink-soft);
 }
 
 .graph-journey[data-static="true"] {
   min-height: auto;
-  padding-top: 56px;
-  padding-bottom: 88px;
+  padding-top: 24px;
+  padding-bottom: 80px;
 }
 
 .graph-journey[data-static="true"] .graph-journey-sticky {
   position: static;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: 1fr;
   min-height: auto;
 }
 
 .graph-journey[data-static="true"] .graph-journey-copy {
-  max-width: none;
   padding-top: 0;
 }
 
 .graph-journey[data-static="true"] .graph-journey-steps {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 18px;
 }
 
-.graph-journey[data-static="true"] .journey-caption {
-  max-width: min(520px, 100%);
-}
-
-.graph-journey[data-static="true"] .graph-journey-visual {
-  display: none;
+.graph-journey[data-static="true"] .journey-step {
+  min-height: 174px;
+  opacity: 1;
+  transform: none;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .graph-journey[data-static="true"] .journey-step::before {
@@ -1195,67 +1234,12 @@ body.early-access-open {
 
 .graph-journey[data-static="true"] .journey-step strong {
   color: var(--ink);
-  font-size: clamp(28px, 2.8vw, 36px);
-  line-height: 0.96;
+  font-size: clamp(24px, 2.4vw, 30px);
 }
 
 .graph-journey[data-static="true"] .journey-step p {
   color: var(--ink-soft);
-  max-width: 20ch;
-  font-size: 15px;
-  line-height: 1.18;
-}
-
-.graph-journey[data-static="true"] .journey-step {
-  min-height: 214px;
-  padding: 18px 18px 16px;
-  scroll-snap-align: start;
-}
-
-.journey-step span {
-  display: block;
-  color: var(--muted);
-  font-family: "Calibre Semibold", Geist, sans-serif;
-  font-size: 15px;
-}
-
-.journey-step strong {
-  display: block;
-  margin-top: 12px;
-  color: var(--ink);
-  font-size: clamp(28px, 2.8vw, 36px);
-  font-weight: 880;
-  line-height: 0.94;
-  transition: color 220ms ease;
-}
-
-.journey-step p {
-  max-width: 20ch;
-  margin-top: 10px;
-  color: var(--ink-soft);
-  font-size: 15px;
-  line-height: 1.18;
-  transition: color 220ms ease;
-}
-
-.journey-step.is-complete strong {
-  color: rgba(21, 21, 21, 0.74);
-}
-
-.journey-step.is-complete p {
-  color: rgba(21, 21, 21, 0.6);
-}
-
-.journey-step.is-active strong {
-  color: var(--ink);
-}
-
-.journey-step.is-active p {
-  color: var(--ink-soft);
-}
-
-.graph-journey-visual {
-  display: none;
+  font-size: 14px;
 }
 
 .journey-scene {
@@ -2877,6 +2861,7 @@ body.early-access-open {
   }
 
   .graph-journey-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
   }
 
@@ -3107,14 +3092,6 @@ body.early-access-open {
     padding-bottom: 72px;
   }
 
-  .graph-journey-copy h3 {
-    font-size: clamp(34px, 9vw, 48px);
-  }
-
-  .graph-journey-intro {
-    font-size: 18px;
-  }
-
   .journey-caption {
     padding: 16px;
   }
@@ -3151,7 +3128,7 @@ body.early-access-open {
   }
 
   .journey-step strong {
-    font-size: clamp(24px, 7vw, 32px);
+    font-size: clamp(22px, 7vw, 30px);
   }
 
   .journey-step p {
