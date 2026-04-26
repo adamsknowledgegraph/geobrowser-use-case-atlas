@@ -2111,8 +2111,8 @@ body.early-access-open {
 }
 
 .geo-native-card[data-native-app="geo-people"] {
-  --native-preview-scale: 1;
-  --native-preview-shift: 0px;
+  --native-preview-scale: 0.94;
+  --native-preview-shift: 4px;
 }
 
 .geo-native-card-label {
@@ -2151,6 +2151,28 @@ body.early-access-open {
   letter-spacing: 0.02em;
   line-height: 1;
   text-transform: uppercase;
+}
+
+.geo-native-card[data-native-app="geo-people"] .geo-native-card-media {
+  background:
+    linear-gradient(180deg, rgba(21, 21, 21, 0.02), rgba(21, 21, 21, 0.08)),
+    #f4f4f1;
+}
+
+.geo-native-card[data-native-app="geo-people"] .geo-native-card-label {
+  max-width: calc(100% - 178px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.geo-native-card[data-native-app="geo-people"] .geo-native-card-status {
+  top: 12px;
+  right: 12px;
+  min-height: 24px;
+  padding: 6px 9px 4px;
+  font-size: 10px;
+  letter-spacing: 0.04em;
 }
 
 .geo-native-card h4 {
