@@ -238,6 +238,7 @@ function createGeoNativeCard(item) {
   const link = document.createElement("a");
   link.className = "geo-native-card";
   link.dataset.tone = item.tone;
+  link.dataset.nativeApp = item.label.toLowerCase().replace(/\s+/g, "-");
   link.href = item.url;
   link.target = "_blank";
   link.rel = "noreferrer";

@@ -2014,8 +2014,11 @@ body.early-access-open {
 }
 
 .geo-native-card {
+  --native-preview-scale: 1.02;
+  --native-preview-shift: 0px;
   position: relative;
   display: grid;
+  grid-template-rows: auto auto 1fr auto;
   gap: 14px;
   min-height: 308px;
   padding: 18px 18px 16px;
@@ -2068,7 +2071,7 @@ body.early-access-open {
   position: relative;
   display: block;
   overflow: hidden;
-  aspect-ratio: 1.4 / 1;
+  height: clamp(188px, 15vw, 224px);
   border: 1px solid rgba(21, 21, 21, 0.08);
   border-radius: 18px;
   background:
@@ -2103,13 +2106,29 @@ body.early-access-open {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transform: scale(1);
+  transform: translateY(var(--native-preview-shift)) scale(var(--native-preview-scale));
+  transform-origin: center top;
   transition: transform 260ms ease;
 }
 
 .geo-native-card:hover .geo-native-card-media img,
 .geo-native-card:focus-visible .geo-native-card-media img {
-  transform: scale(1.04);
+  transform: translateY(var(--native-preview-shift)) scale(calc(var(--native-preview-scale) + 0.03));
+}
+
+.geo-native-card[data-native-app="geo-podcasts"] {
+  --native-preview-scale: 1.02;
+  --native-preview-shift: 0px;
+}
+
+.geo-native-card[data-native-app="geo-news"] {
+  --native-preview-scale: 1.08;
+  --native-preview-shift: -2px;
+}
+
+.geo-native-card[data-native-app="geo-people"] {
+  --native-preview-scale: 1.18;
+  --native-preview-shift: -4px;
 }
 
 .geo-native-card-label {
@@ -3231,7 +3250,7 @@ body.early-access-open {
   }
 
   .geo-native-card-media {
-    aspect-ratio: 1.55 / 1;
+    height: 192px;
     border-radius: 16px;
   }
 
