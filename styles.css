@@ -1858,16 +1858,17 @@ body.early-access-open {
     radial-gradient(circle at 66% 78%, rgba(216, 255, 54, 0.1), transparent 26%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 248, 244, 0.96));
   display: grid;
-  grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1fr);
-  gap: 30px;
+  grid-template-columns: 1fr;
+  gap: 24px;
   align-items: start;
   box-shadow: 0 20px 54px rgba(0, 0, 0, 0.07);
 }
 
 .geo-native-strip-copy {
   display: grid;
-  gap: 16px;
-  align-content: start;
+  grid-template-columns: minmax(240px, 0.42fr) minmax(0, 1fr);
+  gap: 18px 30px;
+  align-items: end;
 }
 
 .geo-native-brand {
@@ -1909,16 +1910,16 @@ body.early-access-open {
 }
 
 .geo-native-strip-copy h3 {
-  max-width: 11ch;
-  font-size: clamp(30px, 3.1vw, 48px);
+  max-width: 13ch;
+  font-size: clamp(28px, 2.7vw, 42px);
   line-height: 0.96;
 }
 
 .geo-native-strip-copy > div:not(.geo-native-brand) p {
-  max-width: 38ch;
+  max-width: 52ch;
   color: var(--ink-soft);
-  font-size: clamp(18px, 1.45vw, 22px);
-  line-height: 1.2;
+  font-size: clamp(17px, 1.18vw, 20px);
+  line-height: 1.18;
 }
 
 .geo-native-stage {
@@ -1985,6 +1986,7 @@ body.early-access-open {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   padding-top: 12px;
+  align-items: start;
 }
 
 .geo-native-strip-list::before {
@@ -2003,8 +2005,8 @@ body.early-access-open {
   position: relative;
   display: grid;
   grid-template-rows: auto auto 1fr auto;
-  gap: 14px;
-  min-height: 308px;
+  gap: 12px;
+  min-height: 0;
   padding: 18px 18px 16px;
   overflow: hidden;
   border: 1px solid rgba(21, 21, 21, 0.1);
@@ -2055,7 +2057,8 @@ body.early-access-open {
   position: relative;
   display: block;
   overflow: hidden;
-  height: clamp(176px, 12vw, 198px);
+  aspect-ratio: 16 / 9;
+  min-height: 0;
   border: 1px solid rgba(21, 21, 21, 0.08);
   border-radius: 18px;
   background:
@@ -2111,8 +2114,8 @@ body.early-access-open {
 }
 
 .geo-native-card[data-native-app="geo-people"] {
-  --native-preview-scale: 0.94;
-  --native-preview-shift: 4px;
+  --native-preview-scale: 1;
+  --native-preview-shift: 0px;
 }
 
 .geo-native-card-label {
@@ -2159,8 +2162,15 @@ body.early-access-open {
     #f4f4f1;
 }
 
+.geo-native-card[data-native-app="geo-people"] .geo-native-card-media img {
+  box-sizing: border-box;
+  padding: 10px 12px 0;
+  object-fit: contain;
+  object-position: center top;
+}
+
 .geo-native-card[data-native-app="geo-people"] .geo-native-card-label {
-  max-width: calc(100% - 178px);
+  max-width: calc(100% - 154px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2171,17 +2181,20 @@ body.early-access-open {
   right: 12px;
   min-height: 24px;
   padding: 6px 9px 4px;
-  font-size: 10px;
+  max-width: 146px;
+  overflow: hidden;
+  font-size: 9px;
   letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .geo-native-card h4 {
   position: relative;
   z-index: 1;
-  max-width: 11ch;
-  font-size: clamp(28px, 2.1vw, 34px);
+  max-width: 12ch;
+  font-size: clamp(24px, 1.85vw, 31px);
   font-weight: 860;
-  line-height: 0.96;
+  line-height: 0.98;
 }
 
 .geo-native-card p {
@@ -2829,6 +2842,11 @@ body.early-access-open {
     grid-template-columns: 1fr;
   }
 
+  .geo-native-strip-copy {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
   .geo-native-stage {
     gap: 14px;
   }
@@ -3249,7 +3267,7 @@ body.early-access-open {
   }
 
   .geo-native-card-media {
-    height: 192px;
+    aspect-ratio: 16 / 9;
     border-radius: 16px;
   }
 
