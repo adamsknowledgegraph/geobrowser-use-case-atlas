@@ -1,6 +1,6 @@
-# Geo Use Cases Portfolio
+# Geo Use Cases
 
-A dependency-free portfolio page for Geo-powered knowledge graph examples.
+A dependency-free use-cases page for Geo-powered knowledge graph examples.
 
 Published URL:
 

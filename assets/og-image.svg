@@ -39,12 +39,12 @@
     <path d="M12 23H34" stroke="#FBFBF8" stroke-width="9" stroke-linecap="round"/>
   </g>
   <text x="150" y="82" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="26" font-weight="800">Geo</text>
-  <rect x="213" y="59" width="154" height="30" rx="15" fill="#FBFBF8" fill-opacity="0.06" stroke="#FBFBF8" stroke-opacity="0.18"/>
-  <text x="232" y="80" fill="#FBFBF8" fill-opacity="0.72" font-family="Geist, Inter, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="2">PROJECT PORTFOLIO</text>
+  <rect x="213" y="59" width="112" height="30" rx="15" fill="#FBFBF8" fill-opacity="0.06" stroke="#FBFBF8" stroke-opacity="0.18"/>
+  <text x="232" y="80" fill="#FBFBF8" fill-opacity="0.72" font-family="Geist, Inter, Arial, sans-serif" font-size="12" font-weight="800" letter-spacing="2">USE CASES</text>
   <text x="930" y="82" fill="#FBFBF8" fill-opacity="0.72" font-family="Geist, Inter, Arial, sans-serif" font-size="16" font-weight="700">geobrowser.io</text>
 
-  <text x="70" y="168" fill="#D8FF36" font-family="Geist, Inter, Arial, sans-serif" font-size="16" font-weight="900" letter-spacing="4">PORTFOLIO OF GEO-POWERED PROJECTS</text>
-  <text x="70" y="251" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="84" font-weight="900" letter-spacing="0">Geo portfolio.</text>
+  <text x="70" y="168" fill="#D8FF36" font-family="Geist, Inter, Arial, sans-serif" font-size="16" font-weight="900" letter-spacing="4">GEO-POWERED USE CASES</text>
+  <text x="70" y="251" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="84" font-weight="900" letter-spacing="0">Geo use cases.</text>
   <text x="74" y="306" fill="#FBFBF8" fill-opacity="0.74" font-family="Geist, Inter, Arial, sans-serif" font-size="27" font-weight="650">
     <tspan x="74" dy="0">Websites, videos, maps, and explorers</tspan>
     <tspan x="74" dy="36">powered by data organized on</tspan>
@@ -53,19 +53,19 @@
 
   <g font-family="Geist, Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#FBFBF8" fill-opacity="0.76">
     <circle cx="80" cy="425" r="4" fill="#D8FF36"/>
-    <text x="94" y="431">Portfolio of projects</text>
+    <text x="94" y="431">Real apps and projects</text>
     <circle cx="259" cy="425" r="4" fill="#2ACE9D"/>
     <text x="273" y="431">Data organized on Geo</text>
     <circle cx="471" cy="425" r="4" fill="#FF56D0"/>
-    <text x="485" y="431">Knowledge graph powered</text>
+    <text x="485" y="431">Built from one graph</text>
   </g>
 
   <g transform="translate(70 492)">
-    <rect width="170" height="54" rx="27" fill="#D8FF36"/>
-    <text x="28" y="35" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="17" font-weight="900">Explore atlas</text>
-    <path d="M140 27H153M148 20L155 27L148 34" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect width="190" height="54" rx="27" fill="#D8FF36"/>
+    <text x="28" y="35" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="17" font-weight="900">Explore cases</text>
+    <path d="M160 27H173M168 20L175 27L168 34" stroke="#151515" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
-  <g transform="translate(260 492)">
+  <g transform="translate(280 492)">
     <rect width="230" height="54" rx="27" fill="#FBFBF8" fill-opacity="0.07" stroke="#FBFBF8" stroke-opacity="0.22"/>
     <text x="27" y="35" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="17" font-weight="850">Visit geobrowser.io</text>
     <path d="M197 22H209V34M209 22L194 37" stroke="#FBFBF8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -85,8 +85,8 @@
       <rect width="346" height="136" rx="8" fill="url(#cardFill)" stroke="#FBFBF8" stroke-opacity="0.16"/>
       <rect x="24" y="22" width="64" height="30" rx="15" fill="#2ACE9D"/>
       <text x="42" y="43" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="13" font-weight="900">Graph</text>
-      <text x="24" y="94" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="0">Connected by</text>
-      <text x="24" y="127" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="0">meaning</text>
+      <text x="24" y="94" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="0">All connected</text>
+      <text x="24" y="127" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="34" font-weight="900" letter-spacing="0">in one graph</text>
     </g>
   </g>
 
@@ -95,29 +95,7 @@
       <rect width="286" height="106" rx="8" fill="url(#cardFill)" stroke="#FBFBF8" stroke-opacity="0.16"/>
       <rect x="22" y="19" width="76" height="28" rx="14" fill="#FF56D0"/>
       <text x="39" y="39" fill="#151515" font-family="Geist, Inter, Arial, sans-serif" font-size="12" font-weight="900">Projects</text>
-      <text x="22" y="81" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="30" font-weight="900" letter-spacing="0">Usable interfaces</text>
+      <text x="22" y="81" fill="#FBFBF8" font-family="Geist, Inter, Arial, sans-serif" font-size="30" font-weight="900" letter-spacing="0">Useful apps</text>
     </g>
-  </g>
-
-  <rect y="586" width="1200" height="44" fill="#D8FF36"/>
-  <g font-family="Geist, Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="#FBFBF8">
-    <rect x="70" y="596" width="82" height="25" rx="12.5" fill="#151515"/>
-    <text x="90" y="613">Articles</text>
-    <rect x="164" y="596" width="76" height="25" rx="12.5" fill="#151515"/>
-    <text x="185" y="613">Videos</text>
-    <rect x="252" y="596" width="88" height="25" rx="12.5" fill="#151515"/>
-    <text x="274" y="613">Podcasts</text>
-    <rect x="352" y="596" width="74" height="25" rx="12.5" fill="#151515"/>
-    <text x="373" y="613">Maps</text>
-    <rect x="438" y="596" width="88" height="25" rx="12.5" fill="#151515"/>
-    <text x="460" y="613">Claims</text>
-    <rect x="538" y="596" width="92" height="25" rx="12.5" fill="#151515"/>
-    <text x="560" y="613">Sources</text>
-    <rect x="642" y="596" width="82" height="25" rx="12.5" fill="#151515"/>
-    <text x="664" y="613">People</text>
-    <rect x="736" y="596" width="76" height="25" rx="12.5" fill="#151515"/>
-    <text x="758" y="613">Places</text>
-    <rect x="824" y="596" width="92" height="25" rx="12.5" fill="#151515"/>
-    <text x="846" y="613">Datasets</text>
   </g>
 </svg>

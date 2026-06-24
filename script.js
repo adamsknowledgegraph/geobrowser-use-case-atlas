@@ -56,6 +56,7 @@ const cases = [
     dataUrl: "https://www.geobrowser.io/space/f65885c9012be9a9201ddeb6e8c92b61",
     tone: "blue",
     chips: ["Claims", "Maps", "Sources", "Context"],
+    previewImage: "./assets/previews/understand-iran-war-preview.png?v=20260624",
   },
   {
     label: "TheyDebated",
@@ -92,17 +93,6 @@ const cases = [
       "https://www.geobrowser.io/space/b5a31f8182b042437ede0f84ee02f104?tabId=b9e3c99a3db144c4976555bf8f0a167a",
     tone: "green",
     chips: ["Studies", "Outcomes", "Evidence levels", "Safety notes"],
-  },
-  {
-    label: "Disease Data Explorer",
-    category: "Health",
-    tag: "Public health",
-    title: "Disease burden and cure status become structured public-health intelligence.",
-    summary:
-      "A disease explorer that makes cure status, disease categories, public-health facts, and research context easier to scan.",
-    url: "https://disease-data-explorer--deeneyyrn.replit.app/",
-    tone: "green",
-    chips: ["Diseases", "Cure status", "Categories", "Research context"],
   },
   {
     label: "Disease Graph Explorer",
@@ -476,13 +466,13 @@ function initEarlyAccessModal() {
 
     try {
       const payload = {
-        formType: "portfolio_early_access",
+        formType: "use_case_early_access",
         name,
         email,
         interest: [],
         interestOther: whatInterests,
         skills: wantsUpdates ? ["Receive product updates"] : [],
-        roles: ["Portfolio guest"],
+        roles: ["Use case guest"],
         roleOther: "",
         source: "graphgeo.com",
         notes: whatInterests,
