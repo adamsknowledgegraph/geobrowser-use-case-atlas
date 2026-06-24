@@ -95,6 +95,18 @@ const cases = [
     chips: ["Studies", "Outcomes", "Evidence levels", "Safety notes"],
   },
   {
+    label: "GeoPharma",
+    category: "Health",
+    tag: "Pharma graph",
+    title: "Drug information, prices, approvals, and trials become a connected pharma explorer.",
+    summary:
+      "GeoPharma organizes drug products, ingredients, indications, pricing signals, ATC classes, and trial or pipeline data into a searchable graph.",
+    url: "https://geopharma.app/",
+    tone: "green",
+    chips: ["Drug products", "Indications", "Pricing", "Trials"],
+    previewImage: "./assets/previews/geopharma-preview.png?v=20260624",
+  },
+  {
     label: "Disease Graph Explorer",
     category: "Health",
     tag: "Disease graph",
